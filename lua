@@ -60,7 +60,6 @@ if relapce_Bot then
 end
 end
 
-os.remove("lvl20.txt")
 os.remove(getBot().name..".txt")
 setBool("Auto Reconnect", false)
 sleep(200)
@@ -230,10 +229,6 @@ end
 end
 
 function Join_World(worldRotasi)
--- if getBot().world:upper() ~= "EXIT" or getBot().world:find("TUTORIAL_1") then
--- sendPacket("action|quit_to_exit", 3)
--- sleep(2500)
--- end
 bug_JoinWorld=1 nuked=false bug_JoinWorld_2=1
 addHook("onvariant", "ajojing", hooq)
 while getBot().world:upper() ~= worldRotasi:upper() and nuked ~= true do
@@ -330,7 +325,7 @@ function relapce_reconect()
 	if relapce_Bot then
 		disconnect()
 		sleep(1000)
-		CountBotOffline = BotOffline()
+		CountBotOffline = 2 --- BotOffline()
 		info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
 		sleep(math.floor(3000*CountBotOffline))
 	end
@@ -680,6 +675,8 @@ function plat(itemID, worldRotasi)
 	if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	Bot_level = getBot().level
 	if break_world_Tutorial_2_ then
+		sendPacket("action|quit_to_exit", 3)
+		sleep(2500)
 		Join_World(worldRotasi)
 		bot_off(worldRotasi)
 		Stuck()
