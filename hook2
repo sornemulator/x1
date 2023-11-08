@@ -1,0 +1,47 @@
+
+function powershell(informasi, teks)
+local payload = [[{
+    "content": "",
+    "embeds": [{
+        "title": "]].."Count World "..ulang.." From "..#worldHOME.."\\n<:world:991268717667299328> | "..getBot().world.."  status | "..getBot().status.."\\n<:buku:1040970944094675024> | "..informasi..[[",
+        "url": "https://avatarfiles.alphacoders.com/334/334449.png",
+        "color": 5814783,
+        "fields": [{
+            "name": " ",
+            "value": "]]..teks..[["
+        }],
+        "author": {
+            "name": "RN#4802",
+            "url": "https://avatarfiles.alphacoders.com/334/334449.png",
+            "icon_url": "https://avatarfiles.alphacoders.com/334/334449.png"
+        },
+        "footer": {
+            "text": "sended from growpai",
+            "icon_url": "https://copypastatext.com/wp-content/uploads/2021/12/index-14.jpg"
+        }
+    }]
+}]]
+sendWebhook(UrlWebHooks, payload)
+end
+
+function info_sttatus(Url_Offline, texttext)
+local payload = [[{
+    "content": "",
+    "embeds": [{
+        "fields": [{
+            "name": " ",
+            "value": "]]..getBot().name.." | "..texttext..[["
+        }],
+        "author": {
+            "name": "RN#4802",
+            "url": "https://avatarfiles.alphacoders.com/334/334449.png",
+            "icon_url": "https://avatarfiles.alphacoders.com/334/334449.png"
+        },
+        "footer": {
+            "text": "sended from growpai",
+            "icon_url": "https://copypastatext.com/wp-content/uploads/2021/12/index-14.jpg"
+        }
+    }]
+}]]
+sendWebhook(Url_Offline, payload)
+end
