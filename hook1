@@ -1,5 +1,5 @@
 	function powershell(informasi,teks) 
-	teks = string.gsub(teks, "\n\n", "\n")
+	teks = string.gsub(teks, "\\n", "\n")
         local script = [[
         $webHookUrl = "]]..UrlWebHooks..[["
         [System.Collections.ArrayList]$embedArray = @()
