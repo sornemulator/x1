@@ -1,0 +1,42 @@
+	function powershell(informasi,teks) 
+	informasi = string.gsub(informasi, "\n\n", "\n")
+        local script = [[
+        $webHookUrl = "]]..UrlWebHooks..[["
+        [System.Collections.ArrayList]$embedArray = @()
+        $color = ']] .. math.random(1111111,9999999) .. [['
+        $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
+        $ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
+        $description = ']]	.. 'Count World '..ulang..' From '..#worldHOME..'\n<:world:991268717667299328> | '..getBot().world..'  status | '..getBot().status..'\n<:buku:1040970944094675024> | '..informasi..'\n\n'..teks.." \n\n"..[['
+        
+        $embedObject = [PSCustomObject]@{
+            color = $color
+            description = "$description**Cpu : $cpu% || Ram : $ram Mb**"
+            timestamp = Get-Date -Format o
+        }
+        $embedArray.Add($embedObject)
+        $payload = [PSCustomObject]@{
+		   'avatar_url' = 'https://i.postimg.cc/rmhnqMHq/IMG-20221101-131046.jpg'
+            embeds = $embedArray
+        }
+        
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 5) -Method Post -ContentType 'application/json' ]]
+        
+        local pipe = io.popen("powershell -command -", "w")
+          pipe:write(script)
+          pipe:close()
+    end
+function info_sttatus(Url_Offline, texttext)
+texttext = string.gsub(texttext, "\n\n", "\n")
+    local text = [[
+        $webHookUrl = "]]..Url_Offline..[["
+        $payload = @{
+            content = "]]..getBot().name:upper()..[[ ]]..texttext..[["
+        }
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+    ]]
+    local file = io.popen("powershell -command -", "w")
+    file:write(text)
+    file:close()
+end
