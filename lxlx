@@ -164,8 +164,8 @@ bug_JoinWorld=1 nuked=false bug_JoinWorld_2=1
 addHook("onvariant", "ajojing", hooq)
 while getBot().world:upper() ~= worldRotasi:upper() and nuked ~= true do
 	if getBot().status:upper() == "ONLINE" then
-		sendPacket("action|join_request\nname|"..worldRotasi.."|"..doorID.."\ninvitedWorld|0", 3)
-		sleep(5000)
+		sendPacket("action|join_request\nname|"..worldRotasi.."\ninvitedWorld|0", 3)
+		sleep(Sleep_Join_World)
 		bug_JoinWorld=bug_JoinWorld+1
 		-- print("world: "..getBot().world:upper().." Destinasi: "..worldRotasi)
 	end
