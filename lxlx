@@ -390,11 +390,6 @@ local floating = 0
 	return floating
 end
 
-function save(text)
-file = io.open(getBot().name..".txt", "a")
-file:write(text.."\n")
-file:close()
-end
 function Find_Fload_Item(itemID)
 	for _, object in pairs(getObjects()) do
 		x=math.floor(object.x/32)
@@ -577,7 +572,7 @@ end
 
 function plantLite(itemID)
 	for _, tile in pairs(getTiles()) do
-		if tile.fg == 0 and tile.y >= 1 and getTile(tile.x, tile.y+1).fg ~= itemID and getTile(tile.x, tile.y+1).fg ~= itemID-1 and getTile(tile.x, tile.y+1).fg ~= 0 and getTile(tile.x, tile.y+3).fg ~= 6 then
+		if tile.fg == 0 and tile.y >= 1 and getTile(tile.x, tile.y+1).fg ~= itemID and getTile(tile.x, tile.y+1).fg ~= 0 and getTile(tile.x, tile.y+3).fg ~= 6 then
 		runThread(findPath(tile.x, tile.y))
 		place(itemID, 0,0)
 		sleep(50)
