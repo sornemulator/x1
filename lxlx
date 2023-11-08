@@ -2,28 +2,6 @@ Sleep_Join_World = math.floor(math.random(4000,6500))
 id_Trash ={5032,8746,5042,5024,5026,5028,5038,5034,5040,5044,2,3,14,15}
 --- [true untuk YA, false untuk TIDAK] ---
 break_world_Tutorial_2_ = true -- pnb other world
-UrlW = {
-"https://discord.com/api/webhooks/1015662852520022176/N3khW1XMfM8fHzX9ZAfqTnYvH9oSyZ3Qq_aRL2ttdJ3YmPl5-ykYlm6lYKpaQCIvvScU",
-"https://discord.com/api/webhooks/1016241030493896745/uyq1qHYXDGL1utXk6ofJ_JT357mGLe0-8hx5WPUe7hsZYyvhU73sCzLBc6c2Wac5uhYL",
-"https://discord.com/api/webhooks/1016544872771108925/RMpGYZPPPMjU0_9kL9PZoVqZXo6oJIJH-FsNKRocKZQIbpv0vLuMTDpW8aSJIifSJ1Sx",
-"https://discord.com/api/webhooks/1016545520279367751/l-4RNgeG87JWJlKj9PujDK7uLTLVbUMgSPbeYyUbDjiwLLUvNJXmMbk44mhssIITeVjh",
-"https://discord.com/api/webhooks/1016545664269824060/xYpsDcrJ-Inq6AkbE4ARhetM9ggIRbUAt25C4mYBEYCk5j0CViKjlNXOKy78KJewcLsU",
-"https://discord.com/api/webhooks/1016241683207307275/hB6g-lXc5cwAHleXfZ_XZDXX0BhNvb6ke8WtZOQoI_6JZNSdhW1oZ75mBBkC8d05l_KD",
-"https://discord.com/api/webhooks/1017339625947275304/MXUFGX1vF-KopkcasTSe8fljH-n5E6eWRKkEJpfmHAxZ-XuQHBCFm8z-w8hLj3ytlJG7",
-"https://discord.com/api/webhooks/1018747630999830580/DA6Ke7vm7KsP8ljUSDfE-1k_gb3OPw-k1UItqzvQuk4vYoSbYLSJQ2o39YIPEpN1u2PQ",
-"https://discord.com/api/webhooks/1020145321365483560/4Hpu2CoT7JuEg0rmZzENyDzoIvAXkY81zIQNFc9CrHEAHVldfVpaOFW7f_VRKbvIPXJQ",
- "https://discord.com/api/webhooks/1039211983750307980/F7VHE0jfRXIByLNnAICTA2Xn72_HoyDxTVjA39oWU0sIE3R9Qv0kPmNwgFbuS1dLccRo"
-}
-UrlWebHooks= UrlW[SoilFarm]
-itemID = 8772	-- id block
-worldHOME = {
-"NKZQG","NKZQU","FPBGU","MEKWT","EOJHM",
-"OXHUWG","PDRPBJ","QAZPJ","UKFMV","YXEDH",
-"GMUXT","NBLYU","XHWWG",
-"XHWWF","XHWWX","NKZQY"
-}
-worldRotasi = worldHOME[SoilFarm]
-
 ----- [Main] -----
 webhookOffline = "https://discord.com/api/webhooks/1035453000895967292/GWYRmvp5eJ5__Qk42wuLA_YfRKMhy044_qxhWyWKWf_AYDUUBVZ_XQwWvmohFmAw7q_Z"
 inaccessible = "https://discord.com/api/webhooks/1116662319250939904/P67hTtNQFzb8PIUW6EyzMcKZDOpU52UcP5bRAWwNpYYIHZidGE_Wr2wAkeQ07oxb77du"
