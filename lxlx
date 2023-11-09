@@ -572,8 +572,8 @@ end
 
 function plantLite(itemID)
 	for _, tile in pairs(getTiles()) do
-		if tile.fg == 0 and tile.y >= 1 and getTile(tile.x, tile.y+1).fg ~= itemID and getTile(tile.x, tile.y+1).fg ~= 0 and getTile(tile.x, tile.y+3).fg ~= 6 then
-		runThread(findPath(tile.x, tile.y))
+		if tile.fg == 0 and tile.y >= 1 and getTile(tile.x, tile.y+1).fg ~= 0 then
+		findPath(tile.x, tile.y)
 		place(itemID, 0,0)
 		sleep(50)
 		collect(5)
@@ -582,6 +582,7 @@ function plantLite(itemID)
 			elseif GhostSharkkFreeze or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
 			sendPacket("action|join_request\nname|"..getBot().world.."|"..doorID.."\ninvitedWorld|0", 3)
 			sleep(2500)
+			Stuck()
 			GhostSharkkFreeze = false
 			return plantLite(itemID);
 			elseif getBot().status:upper() ~= "ONLINE" then
