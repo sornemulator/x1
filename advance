@@ -921,16 +921,18 @@ end
 			 pnb(itemIDBlock)
 			 collect(2)
 			 if math.floor(findItem(itemIDBlock)) == 0 or math.floor(findItem(itemIDBlock+1)) > 190 or getBot().status:upper() ~= "ONLINE" or string.upper(getBot().world) == string.upper("EXIT") or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
+			 removeHooks()
 			 move(-1, 0)
 			 sleep(250)
-				 Stuck()
-				 while getTile(math.floor(getBot().x/32)-1, math.floor(getBot().y/32)).fg == itemIDBlock do
+			 Stuck()
+			 while getTile(math.floor(getBot().x/32)-1, math.floor(getBot().y/32)).fg == itemIDBlock do
 				 punch(-1,0)
 				 sleep(170)
-				 end
+			 end
 				 collect(2)
 			 break
 			 elseif (itemIDBlock == 880 and getBot().level >= TargetLevel) or (itemIDBlock == 8772 and getBot().level < TargetLevel) then
+			 removeHooks()
 			 print("Break lvl "..getBot().level)
 			 move(-1, 0)
 			 sleep(250)
@@ -938,6 +940,7 @@ end
 			 end
 		 end
 	removeHooks()
+	sleep(500)
 -- [sub Server pas join world Stuck exit] -- -- -- --
 	 if getBot().status:upper() == "ONLINE" and getBot().world:upper() == "EXIT" then
 		ttbNukeExit(worldRotasi)
