@@ -912,6 +912,7 @@ end
 	 while while_pnb do
 	if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
 	if cekban730days_Boolean then
+	removeHooks()
 	os.remove("cekban730dayx.txt")
 	sleep(500)
 	addHook("onvariant", "cekban730dayx", cekban730days)
