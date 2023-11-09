@@ -198,6 +198,8 @@ while getBot().world:upper() ~= worldRotasi:upper() and nuked ~= true do
 	bug_JoinWorld_2=1
 	setBool("Auto Reconnect", true)
 	sleep(200)
+	elseif getBot().world:upper():find(worldRotasi:upper()) then
+	break
 	end
 end
 	if nuked then
@@ -238,6 +240,7 @@ function fixTemporaryErcon()
 			listt=listt-1
 			else
 			setMac(macList[listt])
+			sleep(500)
 			end
 		end
 	end)
@@ -259,9 +262,9 @@ function relapce_reconect()
 	if relapce_Bot then
 		disconnect()
 		sleep(500)
-		CountBotOffline = 2 --- BotOffline()
+		CountBotOffline = BotOffline()
 		info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
-		sleep(math.floor(3000*CountBotOffline))
+		sleep(math.floor(5000*CountBotOffline))
 	end
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
@@ -274,6 +277,7 @@ function relapce_reconect()
 			break
 			else
 			setMac(macList[listt])
+			sleep(500)
 			fixTemporaryErcon()
 			return relapce_reconect()
 			end
@@ -292,6 +296,7 @@ function relapce(worldRotasi)
 	listt=listt+1
 		if listt <= #macList then
 			setMac(macList[listt])
+			sleep(500)
 			fixTemporaryErcon()
 			relapce_reconect()
 			if getBot().status:upper() == "ONLINE" then
@@ -317,6 +322,7 @@ end
 
 function bot_off(worldRotasi) -- SUDAH UPGRade + temp ban
 if getBot().status:upper() ~= "ONLINE" then
+removeHooks()
 if getBot().status:upper() == "ONLINE" then
 info_sttatus(UrlWebHooks, " <:onbutton:873152812454903839> @everyone")
 else
@@ -324,10 +330,9 @@ info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 end
 setBool("Auto Reconnect", false)
 sleep(1000)
-save("-- -- reconect_1_ "..getBot().status:upper())
 while true do
 connect() 
-sleep(math.floor(5000*BotOffline()))
+sleep(math.floor(7000))
 	if getBot().status:upper() == "ONLINE" then
 	break
 	elseif getBot().status:upper() == string.upper("login fail") then 
@@ -353,7 +358,6 @@ sleep(math.floor(5000*BotOffline()))
 	break
 	end
 end
-save("-- reconect_2_ "..getBot().status:upper())
 if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper() ~= "TEMPORARY BAN" then
 	-- [RETURN] --
 	if getBot().world:upper() == "EXIT" and getBot().status:upper() == "OFFLINE" then
@@ -364,11 +368,8 @@ if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper
 	end
 	-- [=====] --
 	while true do
-	save("-- reconect_3_ "..getBot().world)
 	Join_World(worldRotasi)
-	save("-- reconect_4_ "..getBot().status:upper())
 	  if getBot().world:upper() == worldRotasi:upper() then
-	  save("-- reconect_5_  "..getBot().world:upper())
 	  break
 	  end
 	end
@@ -463,18 +464,15 @@ function harvestLite(itemID)
 				end
 			break
 			elseif GhostSharkkFreeze or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
-			sendPacket("action|join_request\nname|"..getBot().world.."|"..doorID.."\ninvitedWorld|0", 3)
-			sleep(2500)
+			Stuck()
 			GhostSharkkFreeze = false
 			return harvestLite(itemID);
 			elseif getBot().status:upper() ~= "ONLINE" then
-			  save("-- harvestLite1 : "..getBot().status:upper())
 			  bot_off(worldRotasi)
 			  Stuck()
 			  return harvestLite(itemID);
 			end
 		elseif getBot().status:upper() ~= "ONLINE" then
-			save("-- harvestLite2 : "..getBot().status:upper())
 			break
 		end
 	end
@@ -507,14 +505,12 @@ function findPathEnd(y)
   sleep(500)
 	for _, PlayerINworld in pairs(getPlayers()) do
 		if PlayerINworld.name:upper():find(getBot().name:upper()) then
-		print("if "..PlayerINworld.name)
 		elseif math.floor(getBot().y/32) == math.floor(PlayerINworld.y/32) then
 			if math.floor(getBot().y/32) > 50 then
 				y = 1
 			else
 				y = math.floor(getBot().y/32)+2
 			end
-			print("else "..PlayerINworld.name)
 		return findPathEnd(y);
 		end
 	end
@@ -536,14 +532,11 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 		Join_World(worldRotasi)
 		Stuck()
 	end
-	lvl_20_remove()
-	Bot_level = getBot().level
-	upgrade_backpack()
-	setSkin()
-	CekReady(itemID)
-	end_time()
+	setSkin() CekReady(itemID) end_time()
 	print("harvest")
-	powershell("<:htt:1025687020628095026> Harvest", "<:jam:987145988470898758> |  "..up_time.." uptime\\n<:bot:994105499865841755> | "..getBot().name.."\\n<:tree:1025674855158394880> | "..readyTHREE.." Ready | "..Gscan(itemID-1).." Float_Blocks\\n<:seed:1025674470054178866> | "..Gscan(itemID).." Float_Seeds | "..totalTHREE.." Seed_Place\\n<:gems:1025674775760220191> | "..math.floor(findItem(112)).." Gems\\nLVL | "..Bot_level.."\\nPING | "..getPing())
+	powershell("<:htt:1025687020628095026> Harvest", "<:jam:987145988470898758> |  "..up_time.." uptime\\n<:bot:994105499865841755> | "..getBot().name.."\\n<:tree:1025674855158394880> | "..readyTHREE.." Ready | "..Gscan(itemID-1).." Float_Blocks\\n<:seed:1025674470054178866> | "..Gscan(itemID).." Float_Seeds | "..totalTHREE.." Seed_Place\\n<:gems:1025674775760220191> | "..math.floor(findItem(112)).." Gems\\nLVL | "..getBot().level.."\\nPING | "..getPing())
+	lvl_20_remove()
+	upgrade_backpack()
 	bicara()
 	misi(itemID-1)
 	GhostSharkk()
@@ -567,7 +560,7 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	while_pnb = false
 	else
 	print("otw pnb")
-	powershell("<:Break:1025674579856871445> Break", "<:jam:987145988470898758> |  "..up_time.." uptime\\n<:bot:994105499865841755> | "..getBot().name.."\\n<:tree:1025674855158394880> | "..readyTHREE.." Ready | "..Gscan(itemID-1).." Float_Blocks\\n<:seed:1025674470054178866> | "..Gscan(itemID).." Float_Seeds | "..totalTHREE.." Seed_Place\\n<:gems:1025674775760220191> | "..math.floor(findItem(112)).." Gems\\nLVL | "..Bot_level.."\\nPING | "..getPing())
+	powershell("<:Break:1025674579856871445> Break", "<:jam:987145988470898758> |  "..up_time.." uptime\\n<:bot:994105499865841755> | "..getBot().name.."\\n<:tree:1025674855158394880> | "..readyTHREE.." Ready | "..Gscan(itemID-1).." Float_Blocks\\n<:seed:1025674470054178866> | "..Gscan(itemID).." Float_Seeds | "..totalTHREE.." Seed_Place\\n<:gems:1025674775760220191> | "..math.floor(findItem(112)).." Gems\\nLVL | "..getBot().level.."\\nPING | "..getPing())
 	end
  end
 end
@@ -582,19 +575,15 @@ function plantLite(itemID)
 			if math.floor(findItem(itemID)) == 0 then
 			  break
 			elseif GhostSharkkFreeze or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
-			sendPacket("action|join_request\nname|"..getBot().world.."|"..doorID.."\ninvitedWorld|0", 3)
-			sleep(2500)
 			Stuck()
 			GhostSharkkFreeze = false
 			return plantLite(itemID);
 			elseif getBot().status:upper() ~= "ONLINE" then
-			  save("-- plantLite1 : "..getBot().status:upper())
 			  bot_off(worldRotasi)
 			  Stuck()
 			  return plantLite(itemID);
 			end
 		elseif getBot().status:upper() ~= "ONLINE" then
-		    save("-- plantLite2 : "..getBot().status:upper())
 			break
 		end
 	end
@@ -602,19 +591,16 @@ end
 
 function plat(itemID, worldRotasi)
 	if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
-	Bot_level = getBot().level
 	if break_world_Tutorial_2_ then
 		Join_World(worldRotasi)
 		bot_off(worldRotasi)
 		Stuck()
 	end
 	setSkin()
-	end_time()
-	CekReady(itemID)
-	bicara()
+	end_time() CekReady(itemID)
 	print("plat")
-	powershell("<:placea:1025675245736165426> placea", "<:jam:987145988470898758> |  "..up_time.." uptime\\n<:bot:994105499865841755> | "..getBot().name.."\\n<:tree:1025674855158394880> | "..readyTHREE.." Ready | "..Gscan(itemID-1).." Float_Blocks\\n<:seed:1025674470054178866> | "..Gscan(itemID).." Float_Seeds | "..totalTHREE.." Seed_Place\\n<:gems:1025674775760220191> | "..math.floor(findItem(112)).." Gems\\nLVL | "..Bot_level.."\\nPING | "..getPing())
-
+	powershell("<:placea:1025675245736165426> placea", "<:jam:987145988470898758> |  "..up_time.." uptime\\n<:bot:994105499865841755> | "..getBot().name.."\\n<:tree:1025674855158394880> | "..readyTHREE.." Ready | "..Gscan(itemID-1).." Float_Blocks\\n<:seed:1025674470054178866> | "..Gscan(itemID).." Float_Seeds | "..totalTHREE.." Seed_Place\\n<:gems:1025674775760220191> | "..math.floor(findItem(112)).." Gems\\nLVL | "..getBot().level.."\\nPING | "..getPing())
+	bicara()
 	GhostSharkk()
 	plantLite(itemID)
 	removeHooks()
@@ -861,9 +847,9 @@ if getBot().status:upper() == "ONLINE" and math.floor(findItem(112)) > count_sav
 			buy_pack()
 		end
 	DropPack_and_BlockPNB(itemIDBlock)
-	powershell("Back_Rotasi ", " <:bot:994105499865841755> | "..getBot().name)
 	Join_World(worldRotasi)
 	Stuck()
+	powershell("Back_Rotasi ", " <:bot:994105499865841755> | "..getBot().name)
 end
 end
 -----[Auto Grinder]-----
@@ -926,8 +912,10 @@ end
 	 while while_pnb do
 	os.remove("cekban730days.txt")
 	if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
+	if cekban730days_Boolean then
 	addHook("onvariant", "cekban730days", cekban730days)
 	print("cekban730days")
+	end
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
 			 pnb(itemIDBlock)
 			 collect(2)
