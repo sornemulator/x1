@@ -924,14 +924,14 @@ end
  harvest(itemIDBlock+1, worldRotasi)
  while_pnb = true
 	 while while_pnb do
-	 if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
-	 os.remove("cekban730days.txt")
-	 addHook("onvariant", "cekban730days", cekban730days)
+	os.remove("cekban730days.txt")
+	if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
+	addHook("onvariant", "cekban730days", cekban730days)
+	print("cekban730days")
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
 			 pnb(itemIDBlock)
 			 collect(2)
 			 if math.floor(findItem(itemIDBlock)) == 0 or math.floor(findItem(itemIDBlock+1)) > 190 or getBot().status:upper() ~= "ONLINE" or string.upper(getBot().world) == string.upper("EXIT") or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
-			 removeHooks()
 			 move(-1, 0)
 			 sleep(250)
 				 Stuck()
@@ -942,13 +942,13 @@ end
 				 collect(2)
 			 break
 			 elseif (itemIDBlock == 880 and getBot().level >= TargetLevel) or (itemIDBlock == 8772 and getBot().level < TargetLevel) then
-			 removeHooks()
 			 print("Break lvl "..getBot().level)
 			 move(-1, 0)
 			 sleep(250)
 			 break
 			 end
 		 end
+	removeHooks()
 -- [sub Server pas join world Stuck exit] -- -- -- --
 	 if getBot().status:upper() == "ONLINE" and getBot().world:upper() == "EXIT" then
 		ttbNukeExit(worldRotasi)
