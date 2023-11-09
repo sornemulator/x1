@@ -884,7 +884,7 @@ function HtToAutoGrinder(itemIDBlock, countGrinder, worldRotasi)
 end
 
 function saved(text)
-file = io.open("cekban730days.txt", "a")
+file = io.open("cekban730dayx.txt", "a")
 file:write(text.."\n")
 file:close()
 end
@@ -910,10 +910,11 @@ end
  harvest(itemIDBlock+1, worldRotasi)
  while_pnb = true
 	 while while_pnb do
-	os.remove("cekban730days.txt")
 	if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
 	if cekban730days_Boolean then
-	addHook("onvariant", "cekban730days", cekban730days)
+	os.remove("cekban730dayx.txt")
+	sleep(500)
+	addHook("onvariant", "cekban730dayx", cekban730days)
 	print("cekban730days")
 	end
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
