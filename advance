@@ -264,11 +264,11 @@ function relapce_reconect()
 		sleep(500)
 		CountBotOffline = BotOffline()
 		info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
-		sleep(math.floor(5000*CountBotOffline))
+		sleep(math.floor(1500*CountBotOffline))
 	end
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
-		sleep(math.floor(5000*CountBotOffline))
+		sleep(math.floor(7000))
 		if getBot().status:upper():find("BANNED") or getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" or getBot().status:upper() == string.upper("suspended") then
 		listt=listt+1
 		info_sttatus(UrlWebHooks," () ".. getMac().." | "..getBot().status:upper())
