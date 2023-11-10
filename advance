@@ -323,9 +323,11 @@ end
 sleep(math.floor(5000*CountBotOffline))
 setBool("Auto Reconnect", true)
 sleep(500)
-while true do
+print("bot_off")
+while getBot().status:upper() ~= "ONLINE" do
 connect() 
 sleep(7000)
+print("bot_off "..getBot().status:upper())
 	if getBot().status:upper() == "ONLINE" then
 	break
 	elseif getBot().status:upper() == string.upper("login fail") then 
