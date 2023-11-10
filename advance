@@ -276,6 +276,7 @@ print("relapce_reconect()")
 				print("disconnect() == "..getBot().status:upper())
 				sleep(1000)
 				end
+				return relapce_reconect();
 			end
 		end
 	end
@@ -464,11 +465,16 @@ function harvestLite(itemID)
 		collect(6)
 			if math.floor(findItem(itemID-1)) > 195 then
 				if break_world_Tutorial_2_ then
+					Join_World("tutorial_2_")
+					print("harvestLite Join_World | "..getBot().world)
+					while math.floor(getBot().x/32) ~= 50 do 
+						findPath(50,23)
+						sleep(1000)
+					end
 				else
-				runThread(findPath(1, math.floor(getBot().y/32)))
-				sleep(200)
+					findPathEnd(math.floor(getBot().y/32)) --- function
 				end
-			break
+				break
 			elseif GhostSharkkFreeze or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
 			Stuck()
 			GhostSharkkFreeze = false
@@ -548,6 +554,7 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	GhostSharkk()
 	harvestLite(itemID)
 	removeHooks()
+	sleep(500)
 	if math.floor(findItem(itemID-1)) ~= 0 then
 		if break_world_Tutorial_2_ then
 			Join_World("tutorial_2_")
