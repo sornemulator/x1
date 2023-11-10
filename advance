@@ -257,6 +257,7 @@ function relapce_reconect()
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
 		sleep(7000)
+		print("relapce_reconect : "..getBot().status:upper().." listt: "..listt)
 		if getBot().status:upper():find("BANNED") or getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" or getBot().status:upper() == string.upper("suspended") then
 		listt=listt+1
 		info_sttatus(UrlWebHooks," () ".. getMac().." | "..getBot().status:upper())
@@ -320,7 +321,7 @@ info_sttatus(UrlWebHooks, " <:onbutton:873152812454903839> @everyone")
 else
 info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 end
-sleep(math.floor(5000*CountBotOffline))
+sleep(7000*CountBotOffline)
 setBool("Auto Reconnect", true)
 sleep(500)
 print("bot_off")
@@ -362,7 +363,6 @@ if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper
 		return bot_off(worldRotasi);
 	end
 	-- [=====] --
-	Vending_X() -- melihat kordinatX vend di world save in vend
 	while true do
 	Join_World(worldRotasi)
 	  if getBot().world:upper() == worldRotasi:upper() then
@@ -893,6 +893,7 @@ function cekban730days(var)
 saved(var[0].." 1."..var[1].."\n")
 end
 
+ Vending_X() -- melihat kordinatX vend di world save in vend
  function RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, HtToAutoGrinder_Boolean, TargetLevel, LoopingRotasi)
  bot_off(worldRotasi)
  if math.floor(findItem(98)) == 0 then breakHit = itemInfo(itemID).breakHit else breakHit = itemInfo(itemID).breakHit - 1 end
