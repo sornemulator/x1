@@ -254,12 +254,6 @@ end
 	return count;
 end
 function relapce_reconect()
-	-- if macList[listt]:upper() ~= getMac():upper() then
-		-- CountBotOffline = BotOffline()
-		-- info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
-		-- disconnect()
-		-- sleep(3000)
-	-- end
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
 		sleep(7000)
@@ -331,7 +325,7 @@ setBool("Auto Reconnect", true)
 sleep(500)
 while true do
 connect() 
-sleep(5000)
+sleep(7000)
 	if getBot().status:upper() == "ONLINE" then
 	break
 	elseif getBot().status:upper() == string.upper("login fail") then 
@@ -740,6 +734,7 @@ end
 --[auto addvend]--
 function Vending_X()
 load(request("GET", "https://pastebin.com/raw/gejghgQ1"))()
+print("Vending_X() "..WorldSaveVendSoil)
 if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().status:upper() == "ONLINE" then
 	Join_World(WorldSaveVendSoil)
 	Stuck()
@@ -751,6 +746,7 @@ if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().stat
 		end
 	end
 	end
+print("Vending_X() ")
 end
 
 function Add_Vending(itemID, worldRotasi)
