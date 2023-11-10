@@ -737,6 +737,7 @@ end
 function Vending_X()
 load(request("GET", "https://pastebin.com/raw/gejghgQ1"))()
 print("Vending_X() "..WorldSaveVendSoil)
+Warp("STORE2")
 if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().status:upper() == "ONLINE" then
 	Join_World(WorldSaveVendSoil)
 	Stuck()
