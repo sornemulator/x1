@@ -51,7 +51,7 @@ end
 function ht_20_tress()
 local ht_20_tress_count = 0
 for _, tile in pairs(getTiles()) do
-	if (tile.fg == 3 or tile.fg == 5 or tile.fg == 15 or tile.fg == 11) and getTile(tile.x, tile.y).ready then
+	if (tile.fg == 3 or tile.fg == 5 or tile.fg == 15 or tile.fg == 11) and getTile(tile.x, tile.y).ready and getBot().world:upper() ~= "EXIT" then
 	ht_20_tress_count=ht_20_tress_count+1
 		findPath(tile.x,tile.y, 50)
 		punch(0,0)
@@ -118,7 +118,7 @@ end
     sleep(3500)
 	validate_world= "ubi"..Random_Name(20)
 	sendPacket("action|join_request\nname|"..validate_world.."\ninvitedWorld|0", 3)
-	sleep(3000)
+	sleep(5000)
 		while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
 		sleep(1000)
 		end
