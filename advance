@@ -362,6 +362,7 @@ if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper
 		info_sttatus(UrlWebHooks, "RETURN__")
 		return bot_off(worldRotasi);
 	end
+	Vending_X() -- melihat kordinatX vend di world save in vend
 	-- [=====] --
 	while true do
 	Join_World(worldRotasi)
@@ -893,7 +894,6 @@ function cekban730days(var)
 saved(var[0].." 1."..var[1].."\n")
 end
 
- Vending_X() -- melihat kordinatX vend di world save in vend
  function RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, HtToAutoGrinder_Boolean, TargetLevel, LoopingRotasi)
  bot_off(worldRotasi)
  if math.floor(findItem(98)) == 0 then breakHit = itemInfo(itemID).breakHit else breakHit = itemInfo(itemID).breakHit - 1 end
