@@ -1,16 +1,12 @@
-id_Trash ={5032,8746,5042,5024,5026,5028,5038,5034,5040,5044,2,3,14,15}
+id_Trash= {5032,8746,5042,5024,5026,5028,5038,5034,5040,5044,2,3,14,15}
 --- [true untuk YA, false untuk TIDAK] ---
 break_world_Tutorial_2_ = true -- pnb other world
 ----- [Main] -----
 webhookOffline = "https://discord.com/api/webhooks/1035453000895967292/GWYRmvp5eJ5__Qk42wuLA_YfRKMhy044_qxhWyWKWf_AYDUUBVZ_XQwWvmohFmAw7q_Z"
 inaccessible = "https://discord.com/api/webhooks/1116662319250939904/P67hTtNQFzb8PIUW6EyzMcKZDOpU52UcP5bRAWwNpYYIHZidGE_Wr2wAkeQ07oxb77du"
 level_Remove = 70
-listt=0  ulang=1
-if errorMac < 10 then
-setMac("so:rn:er:r0:rM:ac")
-sleep(500)
-end
-if math.floor(findItem(98)) == 0 then breakHit = itemInfo(itemID).breakHit else breakHit = itemInfo(itemID).breakHit - 1 end
+listt=0  ulang=1  CountBotOffline=1
+
 function save(text)
 file = io.open(getBot().name..".txt", "a")
 file:write(text.."\n")
@@ -228,9 +224,7 @@ end
  end
 
 function fixTemporaryErcon()
-	-- List string fname addHook : onvariant, onrawpacket, ontrackpacket, onpacket
 	addHook("onpacket", "DEBUG", function(text)
-		-- Log text to file log-debug.txt
 		if text:find("`4Sorry, this account, device or location has been temporarily suspended.``") or text:find("has been suspended.") then
 		disconnect()
 		sleep(500)
@@ -245,12 +239,13 @@ function fixTemporaryErcon()
 		end
 	end)
 	connect()
-	sleep(3000)
+	sleep(5000)
 	-- This function is for RemoveHooks
 	removeHooks()
+	sleep(500)
 end
 function BotOffline()
-local count = 0
+local count = 1
 for _,bot in pairs(getBots()) do
 	if bot.status == "ercon" or bot.status == "offline" then
 	count=count+1
@@ -259,26 +254,31 @@ end
 	return count;
 end
 function relapce_reconect()
-	if relapce_Bot then
-		CountBotOffline = BotOffline()
-		info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
-		disconnect()
-		sleep(math.floor(3000))
-	end
+	-- if macList[listt]:upper() ~= getMac():upper() then
+		-- CountBotOffline = BotOffline()
+		-- info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
+		-- disconnect()
+		-- sleep(3000)
+	-- end
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
-		sleep(5000)
+		sleep(7000)
 		if getBot().status:upper():find("BANNED") or getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" or getBot().status:upper() == string.upper("suspended") then
 		listt=listt+1
 		info_sttatus(UrlWebHooks," () ".. getMac().." | "..getBot().status:upper())
-		if getBot().status:upper() == "TEMPORARY BAN" then disconnect() sleep(5000) end
+		if getBot().status:upper() == "TEMPORARY BAN" then disconnect() sleep(7000) end
 			if listt > #macList then
 			break
 			else
 			setMac(macList[listt])
 			sleep(500)
 			fixTemporaryErcon()
-			return relapce_reconect()
+			CountBotOffline = BotOffline()
+			info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
+			disconnect()
+				while getBot().status:upper() ~= "OFFLINE" do
+				sleep(500)
+				end
 			end
 		end
 	end
@@ -289,7 +289,6 @@ sleep(200)
 count_relapce_Bot()
 mulaiOnline = false
 end
-relapce_reconect()
 function relapce(worldRotasi)
 	if relapce_Bot then
 	listt=listt+1
@@ -332,7 +331,7 @@ setBool("Auto Reconnect", true)
 sleep(500)
 while true do
 connect() 
-sleep(7000)
+sleep(5000)
 	if getBot().status:upper() == "ONLINE" then
 	break
 	elseif getBot().status:upper() == string.upper("login fail") then 
@@ -367,6 +366,7 @@ if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper
 		return bot_off(worldRotasi);
 	end
 	-- [=====] --
+	Vending_X() -- melihat kordinatX vend di world save in vend
 	while true do
 	Join_World(worldRotasi)
 	  if getBot().world:upper() == worldRotasi:upper() then
@@ -892,9 +892,9 @@ function cekban730days(var)
 saved(var[0].." 1."..var[1].."\n")
 end
 
- Vending_X() -- melihat kordinatX vend di world save in vend
  function RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, HtToAutoGrinder_Boolean, TargetLevel, LoopingRotasi)
  bot_off(worldRotasi)
+ if math.floor(findItem(98)) == 0 then breakHit = itemInfo(itemID).breakHit else breakHit = itemInfo(itemID).breakHit - 1 end
  Join_World(worldRotasi)
  CekReady(itemIDBlock+1)
  if nuked then
