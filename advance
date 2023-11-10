@@ -272,7 +272,8 @@ function relapce_reconect()
 			info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
 			disconnect()
 				while getBot().status:upper() ~= "OFFLINE" do
-				sleep(500)
+				print("disconnect() == "..getBot().status:upper())
+				sleep(1000)
 				end
 			end
 		end
@@ -286,6 +287,11 @@ mulaiOnline = false
 end
 function relapce(worldRotasi)
 	if relapce_Bot then
+	disconnect()
+	while getBot().status:upper() ~= "OFFLINE" do
+		print("disconnect() == "..getBot().status:upper())
+		sleep(1000)
+	end
 	listt=listt+1
 		if listt <= #macList then
 			setMac(macList[listt])
