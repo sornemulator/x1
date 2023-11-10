@@ -1,6 +1,6 @@
 --- [DROP_SAMPAH] ---
 Skip_tutorial_mainBoolean = true -- dikarnakan gak ada dirt di skip tutor untuk sementara
-putFristWL = false
+putFristWL = true
 SkipTutorial_targetLVL = false
 worldPublic_Boolean = false
 DROP_SAMPAH = "SSAMPAHCID"
