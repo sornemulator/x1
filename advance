@@ -470,11 +470,11 @@ function harvestLite(itemID)
 			GhostSharkkFreeze = false
 			return harvestLite(itemID);
 			elseif getBot().status:upper() ~= "ONLINE" then
-			  bot_off(worldRotasi)
-			  Stuck()
-			  return harvestLite(itemID);
+				print("harvestLite break 1 "..getBot().status:upper())
+				break
 			end
 		elseif getBot().status:upper() ~= "ONLINE" then
+			print("harvestLite break 2 "..getBot().status:upper())
 			break
 		end
 	end
@@ -543,6 +543,7 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	misi(itemID-1)
 	GhostSharkk()
 	harvestLite(itemID)
+	bot_off(worldRotasi)
 	removeHooks()
 	sleep(500)
 	if math.floor(findItem(itemID-1)) ~= 0 then
@@ -583,11 +584,11 @@ function plantLite(itemID)
 			GhostSharkkFreeze = false
 			return plantLite(itemID);
 			elseif getBot().status:upper() ~= "ONLINE" then
-			  bot_off(worldRotasi)
-			  Stuck()
-			  return plantLite(itemID);
+			print("plantLite break 1 "..getBot().status:upper())
+			break
 			end
 		elseif getBot().status:upper() ~= "ONLINE" then
+			print("plantLite break 2 "..getBot().status:upper())
 			break
 		end
 	end
@@ -607,7 +608,9 @@ function plat(itemID, worldRotasi)
 	bicara()
 	GhostSharkk()
 	plantLite(itemID)
+	bot_off(worldRotasi)
 	removeHooks()
+	sleep(500)
 	setSkin()
 	end
 end
