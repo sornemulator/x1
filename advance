@@ -740,7 +740,6 @@ end
 --[auto addvend]--
 function Vending_X()
 load(request("GET", "https://pastebin.com/raw/gejghgQ1"))()
-print("S Vending_X()"..WorldSaveVendSoil)
 if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().status:upper() == "ONLINE" then
 	Join_World(WorldSaveVendSoil)
 	Stuck()
@@ -752,7 +751,6 @@ if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().stat
 		end
 	end
 	end
-print("E Vending_X()")
 end
 
 function Add_Vending(itemID, worldRotasi)
@@ -1011,8 +1009,7 @@ end
 		if LoopingRotasi then
 		ulang = 1
 		else
-		sendPacket("action|quit_to_exit", 3)
-		sleep(2000)
+		Warp("store2")
 		main = false
 		while_pnb=false
 		end
@@ -1022,4 +1019,3 @@ end
 	return RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, TargetLevel, LoopingRotasi);
 	end
  end
-
