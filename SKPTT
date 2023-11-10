@@ -391,14 +391,15 @@ function Skip_tutorial_main()
 			SkipTutorial_trashWear()
 			setSkin()
 			sleep(500)
+			print("Tutor go STORE2")
 			sendPacket("action|join_request\nname|STORE2\ninvitedWorld|0", 3)
 			sleep(4000)
 		end
-		setBool("Ignore Gems", true)
-		sleep(500)
-		if worldPublic_Boolean then
-		worldPublic()
-		end
+		-- setBool("Ignore Gems", true)
+		-- sleep(500)
+		-- if worldPublic_Boolean then
+		-- worldPublic()
+		-- end
 	elseif Skip_tutorial_mainBoolean == false or getBot().level == 1 then -- untuk sementara
 	sendPacket("action|join_request\nname|"..Random_Name(20).."\ninvitedWorld|0", 3)
 	sleep(4000)
