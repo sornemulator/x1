@@ -547,8 +547,8 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	sleep(500)
 	if math.floor(findItem(itemID-1)) ~= 0 then
 		if break_world_Tutorial_2_ then
-			print("Join_World | "..getBot().world)
 			Join_World("tutorial_2_")
+			print("Join_World | "..getBot().world)
 			while math.floor(getBot().x/32) ~= 50 and getBot().world:lower():find("tutorial_2_") do 
 				findPath(50,23)
 				sleep(1000)
@@ -918,6 +918,7 @@ end
  harvest(itemIDBlock+1, worldRotasi)
  while_pnb = true
 	while while_pnb do
+	print("while_pnb")
 	if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
 	if cekban730days_Boolean then
 	removeHooks()
@@ -926,6 +927,7 @@ end
 	addHook("onvariant", "cekban730dayx", cekban730days)
 	print("cekban730days")
 	end
+	print("while_pnb "..Xpnb)
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
 			 pnb(itemIDBlock)
 			 collect(2)
