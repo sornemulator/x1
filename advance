@@ -391,20 +391,20 @@ local floating = 0
 end
 
 function Find_Fload_Item(itemID)
+if getBot().world:upper() ~= "EXIT" then
 	for _, object in pairs(getObjects()) do
 		x=math.floor(object.x/32)
 		y=math.floor(object.y/32)
 		if object.id == itemID and getTile(x, y).fg ~= 5036 and getTile(x, y).fg ~= 8644 and getTile(x, y).fg ~= 8642 and getTile(x, y).fg ~= 8772 then
 		--save(x.." : "..y.." | "..getTile(x, y).fg)
-		runThread( findPath(x,y) )
-		sleep(200)
-		collectSet(true, 6)
+		findPath(x,y)
+		sleep(2000)
+		collect(6)
 		sleep(500)
 		break
 		end
 	end
-collectSet(false)
-sleep(500)
+end
 end
 
 function misi(itemID)
