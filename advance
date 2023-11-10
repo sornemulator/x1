@@ -267,7 +267,7 @@ function relapce_reconect()
 			setMac(macList[listt])
 			sleep(500)
 			fixTemporaryErcon()
-			CountBotOffline = math.random(1, 2) --BotOffline()
+			CountBotOffline = BotOffline()
 			info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
 			disconnect()
 				while getBot().status:upper() ~= "OFFLINE" do
@@ -539,15 +539,16 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	harvestLite(itemID)
 	removeHooks()
 	if math.floor(findItem(itemID-1)) ~= 0 then
-	if break_world_Tutorial_2_ then
-		Warp("tutorial_2_")
-		while math.floor(getBot().x/32) ~= 50 do 
-			runThread(findPath(50,23, 100))
-			sleep(200)
+		if break_world_Tutorial_2_ then
+			Join_World("tutorial_2_")
+			print("Join_World | "..getBot().world)
+			while math.floor(getBot().x/32) ~= 50 do 
+				findPath(50,23)
+				sleep(2000)
+			end
+		else
+			findPathEnd(math.floor(getBot().y/32)) --- function
 		end
-	else
-		findPathEnd(math.floor(getBot().y/32))
-	end
 	end
 	end_time()
 	CekReady(itemID)
