@@ -547,8 +547,8 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	sleep(500)
 	if math.floor(findItem(itemID-1)) ~= 0 then
 		if break_world_Tutorial_2_ then
-			print("Join_World | "..getBot().world)
 			Join_World("tutorial_2_")
+			print("Join_World | "..getBot().world)
 			while math.floor(getBot().x/32) ~= 50 and getBot().world:lower():find("tutorial_2_") do 
 				findPath(50,23)
 				sleep(1000)
