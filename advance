@@ -328,7 +328,7 @@ else
 info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 end
 sleep(7000*CountBotOffline)
-setBool("Auto Reconnect", true)
+setBool("Auto Reconnect", false)
 sleep(500)
 print("bot_off")
 while getBot().status:upper() ~= "ONLINE" do
