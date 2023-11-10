@@ -1,0 +1,624 @@
+--- [DROP_SAMPAH] ---
+Skip_tutorial_mainBoolean = true -- dikarnakan gak ada dirt di skip tutor untuk sementara
+putFristWL = false
+SkipTutorial_targetLVL = false
+worldPublic_Boolean = false
+DROP_SAMPAH = "SSAMPAHCID"
+doorID = "B15M1LL4H"
+ 
+--[function]--
+function runThread(func)
+return func;
+end
+
+ function Stuck()
+if getBot().status:upper() == "ONLINE" then
+	while getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 do
+		sendPacket("action|join_request\nname|"..getBot().world.."|"..doorID.."\ninvitedWorld|0", 3)
+		sleep(2500)
+	end
+end
+end
+ 
+function Gscan(itemID)
+floating = 0
+	for _, obj in pairs(getObjects()) do
+		if obj.id == itemID then
+		floating = math.floor(floating + obj.count)
+		end
+	end
+	return floating
+end
+
+function BD(x, y)
+   while getTile(math.floor(getBot().x/32)+x, math.floor(getBot().y/32)+y).fg ~= 0 do
+    punch(x, y)
+    sleep(180)
+  end
+ end
+
+function breakFristLock()
+for _, tile in pairs(getTiles()) do
+	if tile.fg == 9640 then
+		findPath(tile.x-1, tile.y)
+		sleep(2000)
+		BD(1, 0)
+		break
+	end
+end
+end
+
+function ht_20_tress()
+local ht_20_tress_count = 0
+for _, tile in pairs(getTiles()) do
+	if (tile.fg == 3 or tile.fg == 5 or tile.fg == 15 or tile.fg == 11) and getTile(tile.x, tile.y).ready then
+	ht_20_tress_count=ht_20_tress_count+1
+		findPath(tile.x,tile.y, 50)
+		punch(0,0)
+		sleep(10)
+		collect(6)
+		if ht_20_tress_count > 20 then
+		break
+		end
+	end
+end
+end
+ 
+function put(id,x,y)
+   while getTile(math.floor(getBot().x/32)+x, math.floor(getBot().y/32)+y).fg == 0 and math.floor(findItem(id)) ~= 0 do
+    place(id, x, y)
+    sleep(200)
+  end
+end
+ 
+function Tutor()
+while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
+sleep(500)
+end
+    sendPacket("ftue_start_popup_close", 2)
+	sleep(3500)
+    findPath(86,30)
+    sleep(250)
+    enter()
+    sleep(3000)
+		while getBot().world:find("TUTORIAL_1") do
+		sleep(1000)
+		end
+    findPath(46,23)
+    sleep(2000)
+	while math.floor(getBot().x/32) ~= 46 do
+	findPath(46,23)
+    sleep(2000)
+	end
+    BD(1,0)
+    place(2,1,0)
+    sleep(600)
+    BD(1,0)
+	collectSet(3, true)
+    sleep(2000)
+    place(3,1,0)
+    sleep(2000)
+    place(10672,1,0)
+    sleep(1000)
+	BD(1,0)
+    findPath(math.floor(getBot().x/32)+1, math.floor(getBot().y/32))
+	sleep(2000)
+	collectSet(3, false)
+	if math.floor(findItem(48)) == 1 then
+	info_sttatus(UrlWebHooks,"Skip_tutorial_main() jeans : ".. math.floor(findItem(48)).." @everyone")
+    wear(48)
+    sleep(1000)
+    sendPacket("action|quit_to_exit", 3)
+    sleep(3500)
+	validate_world= "ubi"..Random_Name(20)
+	sendPacket("action|join_request\nname|"..validate_world.."\ninvitedWorld|0", 3)
+	sleep(3000)
+		while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
+		sleep(1000)
+		end
+if putFristWL then
+	put(9640,0,-1)
+	say("/cheer")
+	sleep(1000)
+end
+-- if getTile(math.floor(getBot().x/32)+1, math.floor(getBot().y/32)).fg == 3898 then
+	-- findPath(math.floor(getBot().x/32)+2, math.floor(getBot().y/32))
+	-- sleep(250)
+	-- wrench(1,0)
+	-- sleep(500)
+	-- sendPacket("action|dialog_return\ndialog_name|phonecall\ntilex|"..(math.floor(getBot().x/32)+1).."|\ntiley|"..math.floor(getBot().y/32).."|\nnum|-2|\ndial|12345", 2)
+	-- sleep(500)
+	-- sendPacket("action|dialog_return\ndialog_name|phonecall\ntilex|"..(math.floor(getBot().x/32)+1).."|\ntiley|"..math.floor(getBot().y/32).."|\nnum|12345|\nbuttonClicked|chc0", 2)
+	-- sleep(500)
+-- end
+ht_20_tress()
+		if math.floor(getBot().x/32) > 80 then
+			findPath(80, 15)
+			sleep(250)
+		else
+			findPath(math.floor(getBot().x/32), 15)
+			sleep(250)
+		end
+	while math.floor(findItem(2)) ~= 0 do
+		put(2,0,-1)
+		put(2,0, 1)
+		findPath(math.floor(getBot().x/32)+1, math.floor(getBot().y/32))
+		sleep(200)
+		if math.floor(getBot().x/32) > 98 then
+			break
+		end
+	end
+	else
+	info_sttatus(UrlWebHooks,"Skip_tutorial_main() jeans : ".. math.floor(findItem(48)).." @everyone")
+	disconnect()
+	sleep(5000)
+		while getBot().status:upper() ~= "ONLINE" do
+		connect()
+		sleep(6000)
+		end
+	  return Tutor();
+	end
+ end
+ 
+function Random_Name(jumlah)
+local chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890" -- The Char Library
+nameBot = ""
+for i = 1,jumlah do
+local rint = math.random(1, #chars) -- 1 out of length of chars
+nameBot = nameBot..chars:sub(rint, rint)
+end
+return nameBot
+end
+ 
+function upgrade_backpack()
+	if getBot().slots == 16 and math.floor(findItem(112)) >= 100 then
+		sendPacket("action|store\nlocation|bottommenu", 2)
+		sleep(200)
+		sendPacket("action|buy\nitem|locks", 2)
+		sleep(200)
+		sendPacket("action|buy\nitem|upgrade_backpack", 2)
+		sleep(1000)
+	end
+end
+ 
+function SkipTutorial_claim_gems()
+  sendPacket("action|growpedia\nbuttonClicked", 2)
+  sleep(700)
+  sendPacket("action|dialog_return\ndialog_name|dialog_growpedia\nbuttonClicked|claimall", 2)
+  sleep(500)
+end
+ 
+function Join_World(World_Back)
+bug_JoinWorld=1 nuked=false
+while getBot().world:upper() ~= World_Back:upper() and nuked ~= true do
+sendPacket("action|join_request\nname|"..World_Back.."\ninvitedWorld|0", 3)
+sleep(5000)
+	bug_JoinWorld=bug_JoinWorld+1
+	if bug_JoinWorld > 4 then
+	disconnect()
+	sleep(5000)
+	bug_JoinWorld=1
+		while getBot().status:upper() ~= "ONLINE" do
+		connect() 
+		sleep(3000)
+			if getBot().status:upper() == string.upper("login fail") then 
+			disconnect()
+			sleep(5000)
+			elseif getBot().status:upper() == string.upper("suspended") then
+			break
+			end
+		end
+	end
+end
+	if nuked ~= true then
+		while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
+			sleep(1200)
+		end
+	end
+end
+ 
+function Find_Fload_Item(itemID)
+	for _, object in pairs(getObjects()) do
+		x=math.floor(object.x/32)
+		y=math.floor(object.y/32)
+		if object.id == itemID and getTile(x, y).fg ~= 5036 and getTile(x, y).fg ~= 8644 and getTile(x, y).fg ~= 8642 and getTile(x, y).fg ~= 8772 then
+		findPath(x,y)
+		sleep(2000)
+		collect(2)
+		sleep(200)
+		break
+		end
+	end
+end
+function buyClothes()
+	if math.floor(findItem(112)) >= 50 then
+		sendPacket("action|store\nlocation|bottommenu", 2)
+		sleep(100)
+		sendPacket("action|buy\nitem|locks", 2)
+		sleep(100)
+		sendPacket("action|buy\nitem|clothes", 2)
+		sleep(250)
+	end
+end
+function SkipTutorial_autoWear()
+id_Clothes_yangDipakai_skipTutorial = {}
+for _, yangDipakai in pairs(getClothes()) do
+  if findClothes(yangDipakai.id) then
+  table.insert(id_Clothes_yangDipakai_skipTutorial, yangDipakai.id)
+	else
+	wear(yangDipakai.id)
+	sleep(1000)
+  end
+end
+end
+ 
+function SkipTutorial_trashWear()
+for _, yangDipakai in pairs(getClothes()) do
+  if findClothes(yangDipakai.id) then
+  table.insert(id_Clothes_yangDipakai_skipTutorial, yangDipakai.id)
+	else
+	sendPacket("action|trash\n|itemID|".. yangDipakai.id, 2)
+	sendPacket("action|dialog_return\ndialog_name|trash_item\nitemID|" .. yangDipakai.id .. "|\ncount|" ..math.floor(findItem(yangDipakai.id)), 2)
+	sleep(500)
+  end
+end
+end
+ 
+function setSkin()
+	color={1348237567, 1685231359, 2022356223, 2190853119, 2527912447, 2864971775, 3033464831, 3370516479}
+	sendPacket("action|setSkin\ncolor|"..color[math.random(1, #color)], 2)
+end
+function SkipTutorial_Trash_All()
+ if getBot().status:upper() == "ONLINE" then
+    for _,v in pairs(getInventory()) do
+		if v.id == 32 or v.id == 6336 or v.id == 9640 or v.id == 18 or v.id == 48 or v.id == 98 then -- item yang tidak dapat di drop 
+		else
+		sendPacket("action|trash\n|itemID|".. v.id, 2)
+		sendPacket("action|dialog_return\ndialog_name|trash_item\nitemID|" .. v.id .. "|\ncount|" ..v.count, 2)
+		sleep(250)
+		end
+	end
+ end
+ end
+function DropSisain1()
+	findPath(87,17)
+	sleep(250)
+	while math.floor(findItem(98)) >= 2 do
+		drop(98, math.floor(findItem(98))-1)
+		sleep(250)
+		if math.floor(findItem(98)) > 2 and math.floor(getBot().x/32) > 90 then
+			move(-1, 0)
+			sleep(250)
+			drop(98, math.floor(findItem(98))-1)
+			sleep(250)
+		else
+			move(1, 0)
+			sleep(250)
+			drop(98, math.floor(findItem(98))-1)
+			sleep(250)
+		end
+	end
+end
+
+function ht_picaxe()
+for _, tile in pairs(getTiles()) do
+	if tile.fg == 99 and getTile(tile.x, tile.y).ready and math.floor(findItem(98)) == 0 then
+		findPath(tile.x, tile.y)
+		punch(0,0)
+		sleep(250)
+		collect(2)
+		Find_Fload_Item(98)
+		DropSisain1()
+		DropSisain1()
+		DropSisain1()
+		break
+	end
+end
+end
+
+function sideCave(modesX, modesY)
+   while getTile(math.floor(getBot().x/32)+modesX,math.floor(getBot().y/32)+modesY).bg ~= 0 or getTile(math.floor(getBot().x/32)+modesX,math.floor(getBot().y/32)+modesY).fg ~= 0 do
+    punch(modesX,modesY)
+    sleep(165) -- 200
+    if getTile(math.floor(getBot().x/32)+modesX,math.floor(getBot().y/32)+modesY).fg == 8 then
+       break
+    end
+  end
+end
+
+function whiteDoor()
+for _, tile in pairs(getTiles()) do
+	if tile.fg == 6 then
+	whiteX=tile.x
+	whiteY=tile.y
+	if getTile(whiteX-2, whiteY).fg == 0 then
+	findPath(whiteX-2,whiteY)
+	sleep(500)
+	else
+	findPath(whiteX-3,whiteY)
+	sleep(500)
+		while getTile(math.floor(getBot().x/32)+1,math.floor(getBot().y/32)).fg ~=0 do
+		punch(1,0)
+		sleep(165)
+		end
+	end
+	findPath(whiteX-2,whiteY)
+	sideCave(1,2)
+	sideCave(2,2)
+	sideCave(0,2)
+	findPath(whiteX+2, whiteY)
+	sideCave(-1,2)
+	sideCave(-2,2)
+	sideCave(0,2)
+	break
+	end
+end
+end
+function clear_dirt()
+ for _, tile in pairs(getTiles()) do
+	if tile.fg == 2 or tile.fg == 10 or tile.fg == 4 or tile.fg == 3918 then
+	if (getTile(tile.x, tile.y-1).fg == 0 and tile.y > 22 and getTile(tile.x+2, tile.y-1).fg ~= 6 and getTile(tile.x+1, tile.y-1).fg ~= 6 and getTile(tile.x-2, tile.y-1).fg ~= 6 and getTile(tile.x-1, tile.y-1).fg ~= 6 ) then
+		findPath(tile.x, tile.y-1, fdelay)
+		sideCave(0,1)
+		sideCave(0,2)
+		collect(6)
+		if getBot().level >= TargetingLevel then
+		print("Level Bot Terpenuhi : "..getBot().level)
+		SkipTutorial_Trash_All()
+			break
+		elseif tile.x == 99 then
+			setSkin()
+			SkipTutorial_Trash_All()
+			return clear_dirt();
+		end
+	end
+	end
+ end
+end
+
+function Skip_tutorial_main()
+	if getBot().world:find("TUTORIAL_1") and getBot().status:upper() == "ONLINE" and math.floor(findItem(6336)) == 0 and Skip_tutorial_mainBoolean then
+	info_sttatus(UrlWebHooks, "Skip_tutorial_main() @everyone")
+	setBool("Ignore Gems", false)
+	sleep(500)
+		Tutor()
+		Join_World(DROP_SAMPAH)
+		Stuck()
+		say(getMac())
+		say("/love")
+		sleep(500)
+		SkipTutorial_Trash_All()
+		SkipTutorial_claim_gems()
+		Find_Fload_Item(98)
+		DropSisain1()
+		DropSisain1()
+		DropSisain1()
+		ht_picaxe()
+		if SkipTutorial_targetLVL then
+			sendPacket("action|join_request\nname|"..Random_Name(20).."\ninvitedWorld|0", 3)
+			sleep(4000)
+			while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
+			sleep(1000)
+			end
+		end
+		if getBot().world:upper() ~= "EXIT" then
+		if SkipTutorial_targetLVL then
+			put(9640,0,-1)
+			say("/cheer")
+			sleep(1000)
+				whiteDoor()
+				info_sttatus(UrlWebHooks, "TargetingLevel: "..TargetingLevel.." @everyone")
+				clear_dirt()
+			end
+			SkipTutorial_autoWear()
+			SkipTutorial_claim_gems()
+			upgrade_backpack()
+			buyClothes()
+			SkipTutorial_autoWear()
+			SkipTutorial_trashWear()
+			setSkin()
+			sleep(500)
+			sendPacket("action|join_request\nname|STORE2\ninvitedWorld|0", 3)
+			sleep(4000)
+		end
+		setBool("Ignore Gems", true)
+		sleep(500)
+		if worldPublic_Boolean then
+		worldPublic()
+		end
+	elseif Skip_tutorial_mainBoolean == false or getBot().level == 1 then -- untuk sementara
+	sendPacket("action|join_request\nname|"..Random_Name(20).."\ninvitedWorld|0", 3)
+	sleep(4000)
+	while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
+	sleep(1000)
+	end
+	whiteDoor()
+	info_sttatus(UrlWebHooks, "TargetingLevel: "..TargetingLevel.." @everyone")
+	clear_dirt()
+	end
+end
+
+-- ================================================================
+function lettsave(text, folder)
+	file = io.open(folder..".txt", "a")
+	file:write(text.."\n")
+	file:close()
+end
+
+ function Small_L(var)
+	if var[0] == "OnConsoleMessage" and var[1]:find("has set the `$World Lock`` to `$PUBLIC") then
+		lettsave('"'..getBot().world..'",', "world_PUBLIC")
+		info_sttatus("https://discord.com/api/webhooks/1112710625643216908/w_4Xrzx2fPNpaso6OPtsWvy12qX5X8I0xdLpWr4CN6m2KTCq6bIJngZaiAyXZpMeofy5", getBot().world:upper())
+		removeHooks()
+		elseif var[0] == "OnDialogRequest" and var[1]:find("`wEdit Door``") then
+		sendPacket("action|dialog_return\ndialog_name|door_edit\ntilex|"..(math.floor(getBot().x/32)-2).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\ndoor_name|\ndoor_target|\ndoor_id|b15m1ll4h", 2)
+		elseif (var[0] == "OnDialogRequest" and var[1]:find("`wEdit My First World Lock``") ) or (var[0] == "OnDialogRequest" and var[1]:find("`wEdit World Lock``") ) then
+		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..(math.floor(getBot().x/32)-1).."|\ntiley|"..math.floor(getBot().y/32).."|\ncheckbox_public|1\ncheckbox_disable_music|0\ntempo|100\ncheckbox_disable_music_render|0\ncheckbox_set_as_home_world|1\nminimum_entry_level|1", 2)
+		elseif var[0] == "OnDialogRequest" and var[1]:find("`wEdit Small Lock``") then
+		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\nbuttonClicked|recalcLock\n\ncheckbox_public|0\ncheckbox_ignore|1", 2)
+		elseif (var[0] == "OnDialogRequest" and var[1]:find("`wEdit Door``")) or (var[0] == "OnDialogRequest" and var[1]:find("`wEdit Barn Door``")) then
+		sendPacket("action|dialog_return\ndialog_name|door_edit\ntilex|"..(math.floor(getBot().x/32)-2).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\ndoor_name|\ndoor_target|\ndoor_id|b15m1ll4h", 2)
+		elseif (var[0] == "OnDialogRequest" and var[1]:find("`wEdit My First World Lock``") ) or (var[0] == "OnDialogRequest" and var[1]:find("`wEdit World Lock``") ) then
+		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..(math.floor(getBot().x/32)-1).."|\ntiley|"..math.floor(getBot().y/32).."|\ncheckbox_public|1\ncheckbox_disable_music|0\ntempo|100\ncheckbox_disable_music_render|0\ncheckbox_set_as_home_world|1\nminimum_entry_level|1", 2)
+		elseif var[0] == "OnDialogRequest" and var[1]:find("`wEdit Small Lock``") then
+		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\nbuttonClicked|recalcLock\n\ncheckbox_public|0\ncheckbox_ignore|1", 2)
+		elseif var[0] == "OnConsoleMessage" and var[1]:find("Oops, you've created too many worlds today.  Try again tomorrow!") then
+		info_sttatus("https://discord.com/api/webhooks/1112710625643216908/w_4Xrzx2fPNpaso6OPtsWvy12qX5X8I0xdLpWr4CN6m2KTCq6bIJngZaiAyXZpMeofy5", var[1])
+		main=true
+	end
+end
+
+function lettput(id, x,y)
+	while getTile(math.floor(getBot().x / 32)+x,math.floor(getBot().y / 32)+y).fg == 0 do
+	place(id,x,y)
+	sleep(300)
+	end
+end
+function lettpukul(x,y)
+	while getTile(math.floor(getBot().x / 32)+x,math.floor(getBot().y / 32)+y).fg ~= 0 do
+	punch(x,y)
+	sleep(200)
+	end
+end
+
+function lettJoin_World(dunia)
+sendPacket("action|join_request\nname|"..dunia.."|\ninvitedWorld|0", 3)
+sleep(7000)
+end
+ function lettstuck()
+if getBot().status:upper() == "ONLINE" then
+	while getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 do
+		sendPacket("action|join_request\nname|"..getBot().world.."|"..Door_Id.."\ninvitedWorld|0", 3)
+		sleep(2500)
+	end
+end
+end
+
+function perabot()
+	Find_Fload_Item(smal_lock)
+	drop(smal_lock, math.floor(findItem(smal_lock)-target))
+	Find_Fload_Item(singnal_jammer)
+	move(-1,0) sleep(100)
+	drop(singnal_jammer, math.floor(findItem(singnal_jammer)-target))
+	Find_Fload_Item(block_door)
+	move(-1,0) sleep(100)
+	drop(block_door, math.floor(findItem(block_door)-(target*4)))
+	Find_Fload_Item(pintu_lawang)
+	move(-1,0) sleep(100)
+	drop(pintu_lawang, math.floor(findItem(pintu_lawang)-target))
+	move(-1,0) sleep(100)
+	drop(pintu_lawang+1, 0)
+	sleep(250)
+drop(pintu_lawang, math.floor(findItem(pintu_lawang)-target))
+sleep(200)
+drop(block_door, math.floor(findItem(block_door)-(target*4)))
+sleep(200)
+drop(singnal_jammer, math.floor(findItem(singnal_jammer)-target))
+sleep(200)
+drop(smal_lock, math.floor(findItem(smal_lock)-target))
+sleep(200)
+end
+
+ function findBlockDrop()
+	for _, tile in pairs(getTiles()) do
+		if tile.fg == 4584 then
+		runThread(findPath(tile.x, tile.y, 5))
+		sleep(500)
+		break
+		end
+	end
+ end
+
+
+ function lettdrop_all()
+ findBlockDrop()
+    for _,v in pairs(getInventory()) do
+		if v.id == smal_lock or v.id == singnal_jammer or v.id == block_door or v.id == pintu_lawang then -- item yang tidak dapat di drop 
+			while getBot().status:upper() == "ONLINE" do
+				drop(v.id)
+				sleep(500) -- 800
+				if math.floor(findItem(v.id)) == 0 or string.upper(getBot().world) == string.upper("EXIT") then
+				break
+				else
+				move(-1,0)
+				sleep(400)
+				end
+			end
+		end
+	end
+end
+function JedaGantian()
+	local jedaPlayers=0
+	for _, Bot in pairs(getPlayers()) do
+	jedaPlayers=jedaPlayers+1
+	end
+	return jedaPlayers;
+end
+
+function worldPublic()
+	target = 1
+	Door_Id = "b15m1ll4h"
+	smal_lock = 202
+	singnal_jammer = 226
+	block_door = 5036 -- bisa all block
+	pintu_lawang = 886 -- only barn_door/door splice dirt cave
+	world_lock = 242
+	world_gudang = "malisit"
+	lettJoin_World(world_gudang)
+	lettstuck()
+--[jeda]
+	say("/sleep")
+	info_sttatus(UrlWebHooks, "15000*"..JedaGantian())
+	sleep(math.floor(15000*JedaGantian()))
+	if JedaGantian() == 0 then
+		while getBot().status:upper() ~= "ONLINE" do
+			connect()
+			sleep(10000)
+		end
+	end
+	info_sttatus(UrlWebHooks, "gass perabot()")
+	perabot()
+	wrench_delay = 3000
+	if math.floor(findItem(smal_lock))==1 and math.floor(findItem(singnal_jammer))==1 and math.floor(findItem(block_door))==4 and math.floor(findItem(pintu_lawang))==1 then
+	addHook("onvariant", "ajojing", Small_L)
+	lettJoin_World(Random_Name(math.random(7, 15)))
+	lettput(smal_lock, 0, -1)
+	lettput(singnal_jammer, 1,0) -- signal jammer
+	if getTile(math.floor(getBot().x / 32)+1,math.floor(getBot().y / 32)).fg == singnal_jammer then
+	  punch(1,0)
+	  sleep(300)
+	end
+	 lettput(block_door, -1, 0)
+	 lettput(block_door, -1,-1)
+	 lettput(block_door,  1,-1)
+	 lettput(block_door,  2,-1)
+	 lettput(pintu_lawang, -2,-1)
+	 wrench(0,-1) -- untuk small lock
+	 sleep(wrench_delay)
+	 wrench(-2,-1)
+	 sleep(wrench_delay)
+	 sendPacket("action|join_request\nname|"..getBot().world.."|"..Door_Id.."\ninvitedWorld|0", 3)
+	 sleep(3000)
+	 if math.floor(findItem(9640)) ~= 0 then
+	 place(9640, -1,0) -- world lock frist wl= 9640 wl=242
+	 sleep(2000)
+	 wrench(-1,0) -- untuk world lock
+	 sleep(wrench_delay)
+	 elseif math.floor(findItem(world_lock)) ~= 0 then
+	 place(world_lock, -1,0) -- world lock frist wl= 9640 wl=242
+	 sleep(2000)
+	 wrench(-1,0) -- untuk world lock
+	 sleep(wrench_delay)
+	 end
+	 removeHooks()
+	 if math.floor(findItem(smal_lock)) == 0 or math.floor(findItem(world_lock)) == 0 or math.floor(findItem(block_door)) < 4 or math.floor(findItem(pintu_lawang)) == 0 then
+		lettJoin_World(world_gudang)
+		lettstuck()
+		lettdrop_all()
+	 end
+	else
+		lettJoin_World(world_gudang)
+		lettstuck()
+		lettdrop_all()
+	end
+end
