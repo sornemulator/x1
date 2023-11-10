@@ -254,6 +254,7 @@ end
 	return count;
 end
 function relapce_reconect()
+print("relapce_reconect()")
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
 		sleep(7000)
@@ -285,7 +286,9 @@ sleep(200)
 count_relapce_Bot()
 mulaiOnline = false
 end
+
 function relapce(worldRotasi)
+print("relapce")
 	if relapce_Bot then
 	disconnect()
 	while getBot().status:upper() ~= "OFFLINE" do
@@ -328,7 +331,7 @@ else
 info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 end
 sleep(7000*CountBotOffline)
-setBool("Auto Reconnect", false)
+setBool("Auto Reconnect", true)
 sleep(500)
 print("bot_off")
 while getBot().status:upper() ~= "ONLINE" do
