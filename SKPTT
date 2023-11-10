@@ -73,16 +73,19 @@ end
  
 function Tutor()
 while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
-sleep(500)
+print("while")
+sleep(1000)
 end
     sendPacket("ftue_start_popup_close", 2)
 	sleep(3500)
     sendPacket("ftue_start_popup_close", 2)
 	sleep(3500)
+	print("ftue_start_popup_close")
     findPath(86,30)
     sleep(2000)
     enter()
     sleep(3000)
+	print("enter")
 		while getBot().world:find("TUTORIAL_1") do
 		sleep(1000)
 		end
@@ -119,22 +122,12 @@ end
 		while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
 		sleep(1000)
 		end
-if putFristWL then
-	put(9640,0,-1)
-	say("/cheer")
-	sleep(1000)
-end
--- if getTile(math.floor(getBot().x/32)+1, math.floor(getBot().y/32)).fg == 3898 then
-	-- findPath(math.floor(getBot().x/32)+2, math.floor(getBot().y/32))
-	-- sleep(250)
-	-- wrench(1,0)
-	-- sleep(500)
-	-- sendPacket("action|dialog_return\ndialog_name|phonecall\ntilex|"..(math.floor(getBot().x/32)+1).."|\ntiley|"..math.floor(getBot().y/32).."|\nnum|-2|\ndial|12345", 2)
-	-- sleep(500)
-	-- sendPacket("action|dialog_return\ndialog_name|phonecall\ntilex|"..(math.floor(getBot().x/32)+1).."|\ntiley|"..math.floor(getBot().y/32).."|\nnum|12345|\nbuttonClicked|chc0", 2)
-	-- sleep(500)
--- end
-ht_20_tress()
+	if putFristWL then
+		put(9640,0,-1)
+		say("/cheer")
+		sleep(1000)
+	end
+	ht_20_tress()
 		if math.floor(getBot().x/32) > 80 then
 			findPath(80, 15)
 			sleep(250)
