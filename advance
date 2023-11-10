@@ -740,6 +740,7 @@ end
 --[auto addvend]--
 function Vending_X()
 load(request("GET", "https://pastebin.com/raw/gejghgQ1"))()
+print("S Vending_X()"..WorldSaveVendSoil)
 if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().status:upper() == "ONLINE" then
 	Join_World(WorldSaveVendSoil)
 	Stuck()
@@ -751,7 +752,9 @@ if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().stat
 		end
 	end
 	end
+print("E Vending_X()")
 end
+
 function Add_Vending(itemID, worldRotasi)
 for _, tile in pairs(getTiles()) do
 	if tile.fg == 2978 and tile.x == Kor_X then
@@ -909,7 +912,7 @@ end
  Rotasi_start()
  harvest(itemIDBlock+1, worldRotasi)
  while_pnb = true
-	 while while_pnb do
+	while while_pnb do
 	if break_world_Tutorial_2_ then Xpnb = 50 else Xpnb = 1 Stuck() end
 	if cekban730days_Boolean then
 	removeHooks()
@@ -1019,3 +1022,4 @@ end
 	return RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, TargetLevel, LoopingRotasi);
 	end
  end
+
