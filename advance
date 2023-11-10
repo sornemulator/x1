@@ -260,15 +260,14 @@ end
 end
 function relapce_reconect()
 	if relapce_Bot then
-		disconnect()
-		sleep(500)
 		CountBotOffline = BotOffline()
 		info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
-		sleep(math.floor(1500*CountBotOffline))
+		disconnect()
+		sleep(math.floor(3000))
 	end
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
-		sleep(7000)
+		sleep(5000)
 		if getBot().status:upper():find("BANNED") or getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" or getBot().status:upper() == string.upper("suspended") then
 		listt=listt+1
 		info_sttatus(UrlWebHooks," () ".. getMac().." | "..getBot().status:upper())
@@ -323,12 +322,12 @@ end
 function bot_off(worldRotasi) -- SUDAH UPGRade + temp ban
 if getBot().status:upper() ~= "ONLINE" then
 removeHooks()
-sleep(math.floor(10000*CountBotOffline))
 if getBot().status:upper() == "ONLINE" then
 info_sttatus(UrlWebHooks, " <:onbutton:873152812454903839> @everyone")
 else
-info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone "..math.floor(10000*CountBotOffline))
+info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 end
+sleep(math.floor(5000*CountBotOffline))
 setBool("Auto Reconnect", true)
 sleep(500)
 while true do
