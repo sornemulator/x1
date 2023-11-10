@@ -1,6 +1,6 @@
 --- [DROP_SAMPAH] ---
 Skip_tutorial_mainBoolean = true -- dikarnakan gak ada dirt di skip tutor untuk sementara
-putFristWL = true
+putFristWL = false
 SkipTutorial_targetLVL = false
 worldPublic_Boolean = false
 DROP_SAMPAH = "SSAMPAHCID"
@@ -184,33 +184,9 @@ function SkipTutorial_claim_gems()
   sleep(500)
 end
  
-function Join_World(World_Back)
-bug_JoinWorld=1 nuked=false
-while getBot().world:upper() ~= World_Back:upper() and nuked ~= true do
-sendPacket("action|join_request\nname|"..World_Back.."\ninvitedWorld|0", 3)
-sleep(5000)
-	bug_JoinWorld=bug_JoinWorld+1
-	if bug_JoinWorld > 4 then
-	disconnect()
-	sleep(5000)
-	bug_JoinWorld=1
-		while getBot().status:upper() ~= "ONLINE" do
-		connect() 
-		sleep(3000)
-			if getBot().status:upper() == string.upper("login fail") then 
-			disconnect()
-			sleep(5000)
-			elseif getBot().status:upper() == string.upper("suspended") then
-			break
-			end
-		end
-	end
-end
-	if nuked ~= true then
-		while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
-			sleep(1200)
-		end
-	end
+function Join_World(worldRotasi)
+	sendPacket("action|join_request\nname|"..worldRotasi.."\ninvitedWorld|0", 3)
+	sleep(math.floor(math.random(4000,6000)))
 end
  
 function Find_Fload_Item(itemID)
@@ -378,6 +354,7 @@ function Skip_tutorial_main()
 	setBool("Ignore Gems", false)
 	sleep(500)
 		Tutor()
+		print("Tutor() done")
 		Join_World(DROP_SAMPAH)
 		Stuck()
 		say(getMac())
