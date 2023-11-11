@@ -332,12 +332,12 @@ else
 info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 end
 sleep(7000*CountBotOffline)
-setBool("Auto Reconnect", true)
+setBool("Auto Reconnect", false)
 sleep(500)
 print("bot_off")
 while getBot().status:upper() ~= "ONLINE" do
 connect() 
-sleep(7000)
+sleep(10000)
 print("bot_off "..getBot().status:upper())
 	if getBot().status:upper() == "ONLINE" then
 	break
@@ -372,7 +372,6 @@ if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper
 		info_sttatus(UrlWebHooks, "RETURN__")
 		return bot_off(worldRotasi);
 	end
-	Vending_X() -- melihat kordinatX vend di world save in vend
 	-- [=====] --
 	while true do
 	Join_World(worldRotasi)
@@ -905,6 +904,7 @@ end
 
  function RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, HtToAutoGrinder_Boolean, TargetLevel, LoopingRotasi)
  bot_off(worldRotasi)
+ Vending_X() -- melihat kordinatX vend di world save in vend
  if math.floor(findItem(98)) == 0 then breakHit = itemInfo(itemID).breakHit else breakHit = itemInfo(itemID).breakHit - 1 end
  Join_World(worldRotasi)
  CekReady(itemIDBlock+1)
