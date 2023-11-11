@@ -139,9 +139,11 @@ function NukeCek(var)
 end
 
 function Warp_CekNuke(worldRotasi)
-addHook("onvariant", "NukeCek", NukeCek)
-	Warp(worldRotasi)
-removeHooks()
+	if worldRotasi:lower() ~= "tutorial_2_" then
+	addHook("onvariant", "NukeCek", NukeCek)
+		Warp(worldRotasi)
+	removeHooks()
+	end
 end
 
 function hooq(var)
@@ -929,7 +931,7 @@ end
 	addHook("onvariant", "cekban730dayx", cekban730days)
 	print("cekban730days")
 	end
-	print("while_pnb "..Xpnb)
+	print("while_pnb X:"..math.floor(getBot().x/32).." | "..getBot().world)
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
 			 pnb(itemIDBlock)
 			 collect(2)
