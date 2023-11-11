@@ -127,7 +127,7 @@ end
 		say("/cheer")
 		sleep(1000)
 	end
-	ht_20_tress()
+--	ht_20_tress()
 		if math.floor(getBot().x/32) > 80 then
 			findPath(80, 15)
 			sleep(250)
