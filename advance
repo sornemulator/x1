@@ -411,7 +411,7 @@ if getBot().world:upper() ~= "EXIT" then
 		print(x.." : "..y.." | "..getTile(x, y).fg)
 		findPath(x,y)
 		sleep(2000)
-		collect(6, true)
+		collect(6)
 		sleep(500)
 		break
 		end
@@ -459,13 +459,13 @@ end
 
 function harvestLite(itemID)
 	for _, tile in pairs(getTiles()) do
-		if tile.fg == itemID and getTile(tile.x, tile.y).ready and math.floor(findItem(itemID-1)) < 195 and tile.y ~= line_1_bot() then
+		if tile.fg == itemID and getTile(tile.x, tile.y).ready and math.floor(findItem(itemID-1)) < 175 and tile.y ~= line_1_bot() then
 		runThread(findPath(tile.x, tile.y, 50))
 		punch(0,0)
 		say("/cheer")
 		sleep(10) -- 50
-		collect(6, true)
-			if math.floor(findItem(itemID-1)) > 195 then
+		collect(6)
+			if math.floor(findItem(itemID-1)) > 175 then
 			break
 			elseif GhostSharkkFreeze or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
 			Stuck()
@@ -578,7 +578,7 @@ function plantLite(itemID)
 		findPath(tile.x, tile.y)
 		place(itemID, 0,0)
 		sleep(50)
-		collect(5, true)
+		collect(5)
 			if math.floor(findItem(itemID)) == 0 then
 			  break
 			elseif GhostSharkkFreeze or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
@@ -935,7 +935,7 @@ end
 	print("while_pnb X:"..math.floor(getBot().x/32).." | "..getBot().world)
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
 			 pnb(itemIDBlock)
-			 collect(2, true)
+			 collect(2)
 			 if math.floor(findItem(itemIDBlock)) == 0 or math.floor(findItem(itemIDBlock+1)) > 190 or getBot().status:upper() ~= "ONLINE" or string.upper(getBot().world) == string.upper("EXIT") or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
 			 removeHooks()
 			 move(-1, 0)
@@ -945,7 +945,7 @@ end
 				 punch(-1,0)
 				 sleep(170)
 			 end
-				 collect(2, true)
+				 collect(2)
 			 break
 			 elseif (itemIDBlock == 880 and getBot().level >= TargetLevel) or (itemIDBlock == 8772 and getBot().level < TargetLevel) then
 			 removeHooks()
