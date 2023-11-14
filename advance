@@ -259,7 +259,7 @@ function relapce_reconect()
 print("relapce_reconect()")
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
-		sleep(7000)
+		sleep(5000)
 		print("relapce_reconect : "..getBot().status:upper().." listt: "..listt)
 		if getBot().status:upper():find("BANNED") or getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" or getBot().status:upper() == string.upper("suspended") then
 		listt=listt+1
@@ -271,7 +271,6 @@ print("relapce_reconect()")
 			setMac(macList[listt])
 			sleep(500)
 			fixTemporaryErcon()
-			CountBotOffline = math.random(1,2)--BotOffline()
 			info_sttatus(UrlWebHooks,"relapce_reconect : "..listt .." | ".. #macList .." + ".. getMac())
 			disconnect()
 				while getBot().status:upper() ~= "OFFLINE" do
