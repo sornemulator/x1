@@ -248,8 +248,9 @@ end
 	return count;
 end
 function relapce_reconect()
-setBool("Auto Reconnect", true)
 print("relapce_reconect()")
+setBool("Auto Reconnect", true)
+sleep(500)
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
 		sleep(8000)
