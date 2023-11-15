@@ -248,6 +248,7 @@ end
 	return count;
 end
 function relapce_reconect()
+setBool("Auto Reconnect", true)
 print("relapce_reconect()")
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
@@ -374,8 +375,6 @@ function bot_off(worldRotasi) -- SUDAH UPGRade + temp ban
 		info_sttatus(UrlWebHooks, " DONE RECONECT <:onbutton:873152812454903839> @everyone")
 		start_time()
 	end
-  setBool("Auto Reconnect", true)
-  sleep(250)
   end
 end
 
