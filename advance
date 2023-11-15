@@ -259,7 +259,7 @@ function relapce_reconect()
 print("relapce_reconect()")
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
-		sleep(5000)
+		sleep(8000)
 		print("relapce_reconect : "..getBot().status:upper().." listt: "..listt)
 		if getBot().status:upper():find("BANNED") or getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" or getBot().status:upper() == string.upper("suspended") then
 		listt=listt+1
@@ -317,12 +317,89 @@ print("relapce")
 	os.remove(getBot().name..".txt")
 	count_TEMPORARY_BAN()
 	removeBot(getBot().name)
-	sleep(500)
+	sleep(2000)
 	while_pnb=false
 	main=false 
 	error()
 	end
 end
+
+function AntriRelapceStep1()
+nameBotOffline = {}
+for _,bot in pairs(getBots()) do
+	if bot.status ~= "online" and getBot().name ~= bot.name then
+		table.insert(nameBotOffline, bot.name)
+	end
+end
+end
+
+function CekRemove(targetCek, variableArray)
+if #variableArray == 1 then
+local targetCek_count = 0
+	for _,bot in pairs(getBots()) do
+		if targetCek == bot.name then
+		targetCek_count = targetCek_count + 1
+		end
+	end
+targetCek_c = targetCek_count
+end
+end
+
+function AntriRelapceStep2(variableArray, fixxYo)
+variableArray_Boolean = true
+	for _,step2bot in pairs(variableArray) do
+		BotOffline=step2bot
+		sleep(10000)
+		for _,bot in pairs(getBots()) do
+			if bot.status == "online" and bot.name == BotOffline then
+				if #variableArray == 1 then
+				--[step Selanjut Nya]--
+				variableArray_Boolean = false
+				else
+				--[for membuang name yang sudah online di list variableArray/tsb]--
+					nameBotOffline1 = {}
+					for i=1, #variableArray do
+						if variableArray[i] ~= BotOffline then
+						table.insert(nameBotOffline1, variableArray[i])
+						end
+					end
+					nameBotOffline=nameBotOffline1
+					return AntriRelapceStep2(nameBotOffline, false);
+				end
+			end
+		end
+		--[return]--
+		local nameBotOffline1 = {}
+		for i=1, #variableArray do
+			CekRemove(variableArray[i], {1})
+			targetCek_c1 = targetCek_c
+			if targetCek_c1 == 1 then 
+				table.insert(nameBotOffline1, variableArray[i])
+			end
+		end
+		if #nameBotOffline1 == 1 then
+		if fixxYo then CekRemove(BotOffline, variableArray) end
+			if targetCek_c == 0 and fixxYo then
+			variableArray_Boolean = false
+			end
+			if variableArray_Boolean then AntriRelapceStep2(nameBotOffline1, true) end
+		elseif variableArray_Boolean then
+		return AntriRelapceStep2(nameBotOffline1, false);
+		end
+	end
+end
+
+function AntriRelapce()
+--[step1]--
+AntriRelapceStep1()
+print("Menunggu | "..#nameBotOffline)
+--[step2]--
+if #nameBotOffline >= 1 then
+print("AntriRelapceStep2 go")
+AntriRelapceStep2(nameBotOffline, false)
+end
+end
+
 
 function bot_off(worldRotasi) -- SUDAH UPGRade + temp ban
 if getBot().status:upper() ~= "ONLINE" then
@@ -331,14 +408,13 @@ if getBot().status:upper() == "ONLINE" then
 info_sttatus(UrlWebHooks, " <:onbutton:873152812454903839> @everyone")
 else
 info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
+AntriRelapce()
 end
 sleep(7000*CountBotOffline)
-setBool("Auto Reconnect", false)
-sleep(500)
 print("bot_off")
 while getBot().status:upper() ~= "ONLINE" do
 connect() 
-sleep(10000)
+sleep(7000)
 print("bot_off "..getBot().status:upper())
 	if getBot().status:upper() == "ONLINE" then
 	break
