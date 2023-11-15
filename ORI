@@ -325,6 +325,8 @@ function bot_off(worldRotasi) -- SUDAH UPGRade + temp ban
 	end
 	setBool("Auto Reconnect", false)
 	print("bot_off") sleep(10000*BotOffline())
+	setBool("Auto Reconnect", true)
+	sleep(250)
 	while getBot().status:upper() ~= "ONLINE" do
 	connect() 
 	sleep(7000)
