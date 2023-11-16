@@ -253,8 +253,8 @@ function SkipTutorial_Trash_All()
  end
  end
 function DropSisain1()
-	findPath(87,17)
-	sleep(250)
+	findPath(90,10)
+	sleep(500)
 	while math.floor(findItem(98)) >= 2 do
 		drop(98, math.floor(findItem(98))-1)
 		sleep(250)
