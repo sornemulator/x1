@@ -81,8 +81,13 @@ end
     sendPacket("ftue_start_popup_close", 2)
 	sleep(3500)
 	print("ftue_start_popup_close")
-    findPath(86,30)
+	findPath(86,30)
     sleep(2000)
+	while math.floor(getBot().x/32) ~= 86 and math.floor(getBot().y/32) ~= 30 do
+	print("x:86 , y:30 | X:"..math.floor(getBot().x/32).." , Y:"..math.floor(getBot().y/32))
+		findPath(86,30)
+		sleep(2000)
+	end
     enter()
     sleep(3000)
 	print("enter")
