@@ -1,3 +1,9 @@
+--[BUG]--
+-- selesai pnb
+-- Harvest otw tutorial pnb
+-- plat end
+-- Succec add vend
+
 id_Trash= {5032,8746,5042,5024,5026,5028,5038,5034,5040,5044,2,3,14,15}
 --- [true untuk YA, false untuk TIDAK] ---
 break_world_Tutorial_2_ = true -- pnb other world
@@ -5,14 +11,12 @@ break_world_Tutorial_2_ = true -- pnb other world
 webhookOffline = "https://discord.com/api/webhooks/1035453000895967292/GWYRmvp5eJ5__Qk42wuLA_YfRKMhy044_qxhWyWKWf_AYDUUBVZ_XQwWvmohFmAw7q_Z"
 inaccessible = "https://discord.com/api/webhooks/1116662319250939904/P67hTtNQFzb8PIUW6EyzMcKZDOpU52UcP5bRAWwNpYYIHZidGE_Wr2wAkeQ07oxb77du"
 level_Remove = 70
-listt=0  ulang=1  CountBotOffline=1
-
+listt=0  ulang=1
 function save(text)
 file = io.open(getBot().name..".txt", "a")
 file:write(text.."\n")
 file:close()
 end
-
 function count_TEMPORARY_BAN()
 if TEMPORARY_BAN then
  for _,macc in pairs(macList) do
@@ -32,10 +36,7 @@ if relapce_Bot then
  end
 end
 end
-
 os.remove(getBot().name..".txt")
-setBool("Auto Reconnect", false)
-sleep(200)
 setBool("Ignore Gems", false)
 sleep(200)
 mulaiOnline = true
@@ -117,15 +118,17 @@ sondakika = math.floor((adimadimtarih-sonsaaat)*60)
 break_time = sondakika.." Menit "..(os.date"%S").." detik break_time"
 end
 function CekReady(itemID)
-readyTHREE=0 totalTHREE=0
-for _, tile in pairs(getTiles()) do
-	if tile.fg == itemID then
-	totalTHREE=totalTHREE+1
-	if getTile(tile.x, tile.y).ready then
-	readyTHREE=readyTHREE+1
+	if getBot().status:upper() == "ONLINE" then
+	readyTHREE=0 totalTHREE=0
+		for _, tile in pairs(getTiles()) do
+			if tile.fg == itemID then
+			totalTHREE=totalTHREE+1
+			if getTile(tile.x, tile.y).ready then
+			readyTHREE=readyTHREE+1
+			end
+			end
+		end
 	end
-	end
-end
 end
 
 function Warp(worldRotasi)
@@ -137,7 +140,6 @@ function NukeCek(var)
 	nuked = true
 	end
 end
-
 function Warp_CekNuke(worldRotasi)
 	if worldRotasi:lower() ~= "tutorial_2_" then
 	addHook("onvariant", "NukeCek", NukeCek)
@@ -145,7 +147,6 @@ function Warp_CekNuke(worldRotasi)
 	removeHooks()
 	end
 end
-
 function hooq(var)
 	if var[0] == "OnConsoleMessage" and var[1]:find("That world is inaccessible") then
 	nuked = true
@@ -154,7 +155,6 @@ function hooq(var)
 	sendPacket("action|dialog_return\ndialog_name|dialog_growpedia\nbuttonClicked|claimall", 2)
 	end
 end
-
 function Stuck()
 if getBot().status:upper() == "ONLINE" then
 	while getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 do
@@ -165,6 +165,7 @@ end
 end
 
 function Join_World(worldRotasi)
+if getBot().status:upper() == "ONLINE" then
 bug_JoinWorld=1 nuked=false bug_JoinWorld_2=1
 Warp_CekNuke(worldRotasi:upper())
 while getBot().world:upper() ~= worldRotasi:upper() and nuked ~= true do
@@ -192,6 +193,7 @@ while getBot().world:upper() ~= worldRotasi:upper() and nuked ~= true do
 	sleep(200)
 	disconnect()
 	info_sttatus(UrlWebHooks, "Entring World... "..getBot().world:upper())
+	print("Entring World...")
 	sleep(120000)
 	bug_JoinWorld_2=1
 	setBool("Auto Reconnect", true)
@@ -209,13 +211,16 @@ end
 		end
 	end
 end
-
-function setSkin()
-color={1348237567, 1685231359, 2022356223, 2190853119, 2527912447, 2864971775, 3033464831, 3370516479}
-sendPacket("action|setSkin\ncolor|"..color[math.random(1, #color)], 2)
 end
 
+function setSkin()
+	if getBot().status:upper() == "ONLINE" then
+		color={1348237567, 1685231359, 2022356223, 2190853119, 2527912447, 2864971775, 3033464831, 3370516479}
+		sendPacket("action|setSkin\ncolor|"..color[math.random(1, #color)], 2)
+	end
+end
  function Trash_All()
+ if getBot().status:upper() == "ONLINE" then
     for _,item_id_Trash in pairs(id_Trash) do
 		if math.floor(findItem(item_id_Trash)) ~= 0 and getBot().world:upper() ~= "EXIT" and getBot().status:upper() == "ONLINE" then
 			sendPacket(2, "action|trash\n|itemID|".. item_id_Trash)
@@ -223,6 +228,7 @@ end
 			sleep(250)
 		end
 	end
+ end
  end
 
 function fixTemporaryErcon()
@@ -257,6 +263,8 @@ end
 end
 function relapce_reconect()
 print("relapce_reconect()")
+setBool("Auto Reconnect", true)
+sleep(500)
 	while getBot().status:upper() ~= "ONLINE" do
 		connect()
 		sleep(8000)
@@ -288,7 +296,6 @@ sleep(200)
 count_relapce_Bot()
 mulaiOnline = false
 end
-
 function relapce(worldRotasi)
 print("relapce")
 	if relapce_Bot then
@@ -303,9 +310,10 @@ print("relapce")
 			sleep(500)
 			fixTemporaryErcon()
 			relapce_reconect()
+			print("done: "..getBot().status)
 			if getBot().status:upper() == "ONLINE" then
-			Join_World(worldRotasi)
-			Stuck()
+			   Join_World(worldRotasi)
+			   Stuck()
 			end
 		end
 		if listt > #macList then
@@ -324,149 +332,73 @@ print("relapce")
 	end
 end
 
-function AntriRelapceStep1()
-nameBotOffline = {}
-for _,bot in pairs(getBots()) do
-	if bot.status ~= "online" and getBot().name ~= bot.name then
-		table.insert(nameBotOffline, bot.name)
-	end
-end
-end
-
-function CekRemove(targetCek, variableArray)
-if #variableArray == 1 then
-local targetCek_count = 0
-	for _,bot in pairs(getBots()) do
-		if targetCek == bot.name then
-		targetCek_count = targetCek_count + 1
-		end
-	end
-targetCek_c = targetCek_count
-end
-end
-
-function AntriRelapceStep2(variableArray, fixxYo)
-variableArray_Boolean = true
-	for _,step2bot in pairs(variableArray) do
-		BotOffline=step2bot
-		sleep(10000)
-		for _,bot in pairs(getBots()) do
-			if bot.status == "online" and bot.name == BotOffline then
-				if #variableArray == 1 then
-				--[step Selanjut Nya]--
-				variableArray_Boolean = false
-				else
-				--[for membuang name yang sudah online di list variableArray/tsb]--
-					nameBotOffline1 = {}
-					for i=1, #variableArray do
-						if variableArray[i] ~= BotOffline then
-						table.insert(nameBotOffline1, variableArray[i])
-						end
-					end
-					nameBotOffline=nameBotOffline1
-					return AntriRelapceStep2(nameBotOffline, false);
-				end
-			end
-		end
-		--[return]--
-		local nameBotOffline1 = {}
-		for i=1, #variableArray do
-			CekRemove(variableArray[i], {1})
-			targetCek_c1 = targetCek_c
-			if targetCek_c1 == 1 then 
-				table.insert(nameBotOffline1, variableArray[i])
-			end
-		end
-		if #nameBotOffline1 == 1 then
-		if fixxYo then CekRemove(BotOffline, variableArray) end
-			if targetCek_c == 0 and fixxYo then
-			variableArray_Boolean = false
-			end
-			if variableArray_Boolean then AntriRelapceStep2(nameBotOffline1, true) end
-		elseif variableArray_Boolean then
-		return AntriRelapceStep2(nameBotOffline1, false);
-		end
-	end
-end
-
-function AntriRelapce()
---[step1]--
-AntriRelapceStep1()
-print("Menunggu | "..#nameBotOffline)
---[step2]--
-if #nameBotOffline >= 1 then
-print("AntriRelapceStep2 go")
-AntriRelapceStep2(nameBotOffline, false)
-end
-end
-
-
 function bot_off(worldRotasi) -- SUDAH UPGRade + temp ban
-if getBot().status:upper() ~= "ONLINE" then
-removeHooks()
-if getBot().status:upper() == "ONLINE" then
-info_sttatus(UrlWebHooks, " <:onbutton:873152812454903839> @everyone")
-else
-info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
-AntriRelapce()
-end
-sleep(7000*CountBotOffline)
-print("bot_off")
-while getBot().status:upper() ~= "ONLINE" do
-connect() 
-sleep(7000)
-print("bot_off "..getBot().status:upper())
+  if getBot().status:upper() ~= "ONLINE" then
 	if getBot().status:upper() == "ONLINE" then
-	break
-	elseif getBot().status:upper() == string.upper("login fail") then 
-	disconnect()
-	sleep(15000)
-	elseif getBot().status:upper():find("BANNED") or getBot().status:upper() == string.upper("suspended") or getBot().status:upper() == "GOT CAPTCHA" then
-	TEMPORARY_BAN =false
-	end_time()
-	info_sttatus(webhookOffline, " "..getBot().status.." | "..up_time)
-	info_sttatus(UrlWebHooks, " "..getBot().status.." <:offbutton:873152764279144458> "..listt .." | ".. #macList)
-	-------------------
-	relapce(worldRotasi)
-	-------------------
-	break
-	elseif getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" then
-	TEMPORARY_BAN =true
-	end_time()
-	info_sttatus(webhookOffline, " "..getBot().status.." | "..up_time)
-	info_sttatus(UrlWebHooks, " "..getBot().status.." <:offbutton:873152764279144458> "..listt .." | ".. #macList)
-	-------------------
-	relapce(worldRotasi)
-	-------------------
-	break
+	info_sttatus(UrlWebHooks, " <:onbutton:873152812454903839> @everyone")
+	else
+	info_sttatus(UrlWebHooks, " <:offbutton:873152764279144458> @everyone")
 	end
-end
-if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper() ~= "TEMPORARY BAN" then
-	-- [RETURN] --
-	if getBot().world:upper() == "EXIT" and getBot().status:upper() == "OFFLINE" then
+	setBool("Auto Reconnect", false)
+	print("bot_off") sleep(10000*BotOffline())
+	setBool("Auto Reconnect", true)
+	sleep(250)
+	while getBot().status:upper() ~= "ONLINE" do
+	connect() 
+	sleep(7000)
+	print("bot_off "..getBot().status:upper())
+		if getBot().status:upper() == "ONLINE" then
+		break
+		elseif getBot().status:upper() == string.upper("login fail") then 
 		disconnect()
 		sleep(10000)
-		info_sttatus(UrlWebHooks, "RETURN__")
-		return bot_off(worldRotasi);
+		elseif getBot().status:upper():find("BANNED") or getBot().status:upper() == string.upper("suspended") or getBot().status:upper() == "GOT CAPTCHA" then
+		TEMPORARY_BAN =false
+		end_time()
+		info_sttatus(webhookOffline, " "..getBot().status.." | "..up_time)
+		info_sttatus(UrlWebHooks, " "..getBot().status.." <:offbutton:873152764279144458> "..listt .." | ".. #macList)
+		-------------------
+		relapce(worldRotasi)
+		-------------------
+		break
+		elseif getBot().status:upper() == "TEMPORARY BAN" or getBot().status:upper() == "GOT CAPTCHA" then
+		TEMPORARY_BAN =true
+		end_time()
+		info_sttatus(webhookOffline, " "..getBot().status.." | "..up_time)
+		info_sttatus(UrlWebHooks, " "..getBot().status.." <:offbutton:873152764279144458> "..listt .." | ".. #macList)
+		-------------------
+		relapce(worldRotasi)
+		-------------------
+		break
+		end
 	end
-	-- [=====] --
-	while true do
-	Join_World(worldRotasi)
-	  if getBot().world:upper() == worldRotasi:upper() then
-	  break
-	  end
+	if getBot().status:upper() ~= string.upper("suspended") or getBot().status:upper() ~= "TEMPORARY BAN" then
+		-- [RETURN] --
+		if getBot().world:upper() == "EXIT" and getBot().status:upper() == "OFFLINE" then
+			disconnect()
+			sleep(10000)
+			info_sttatus(UrlWebHooks, "RETURN__")
+			return bot_off(worldRotasi);
+		end
+		-- [=====] --
+		while true do
+		Join_World(worldRotasi)
+		  if getBot().world:upper() == worldRotasi:upper() then
+		  break
+		  end
+		end
+		info_sttatus(UrlWebHooks, " DONE RECONECT <:onbutton:873152812454903839> @everyone")
+		start_time()
 	end
-	info_sttatus(UrlWebHooks, " DONE RECONECT <:onbutton:873152812454903839> @everyone")
-	start_time()
-end
-end
+  end
 end
 
 function bicara()
-chat = {"Juvenile","Remaja atau muda","Keep","Menjaga","Kick","Menendang","Know","Mengetahui","Laugh","Tertawa","Launch","Meluncurkan atau memulai","Leak","Bocor","Majestic","Megah","Meaningful","Penuh arti","Muddy","Berlumpur","Nature","Alam","Newspaper","Koran","Night","Malam","Old","Tua","Only","Hanya","Original","Asli","Peaceful","Tenang","Personal","Pribadi atau bersifat personal","Pleased","Senang","Qualified","Berkualitas","Quality","Kualitas","Queenm","Ratu","Queenly","Seperti ratu"}
-say(" `"..math.random(1, 9)..chat[math.random(1, #chat)])
+	if getBot().status:upper() == "ONLINE" then
+		chat = {"Juvenile","Remaja atau muda","Keep","Menjaga","Kick","Menendang","Know","Mengetahui","Laugh","Tertawa","Launch","Meluncurkan atau memulai","Leak","Bocor","Majestic","Megah","Meaningful","Penuh arti","Muddy","Berlumpur","Nature","Alam","Newspaper","Koran","Night","Malam","Old","Tua","Only","Hanya","Original","Asli","Peaceful","Tenang","Personal","Pribadi atau bersifat personal","Pleased","Senang","Qualified","Berkualitas","Quality","Kualitas","Queenm","Ratu","Queenly","Seperti ratu"}
+		say(" `"..math.random(1, 9)..chat[math.random(1, #chat)])
+	end
 end
-
 function Gscan(itemID)
 local floating = 0
 	for _, obj in pairs(getObjects()) do
@@ -496,6 +428,7 @@ end
 -- Find_Fload_Item(8772)
 
 function misi(itemID)
+  if getBot().status:upper() == "ONLINE" then
 	fload = true
 	while fload and Gscan(itemID) > 199 do
 	Find_Fload_Item(itemID)
@@ -507,10 +440,10 @@ function misi(itemID)
 		break
 		end
 	end
+  end
 end
-
 function upgrade_backpack()
-	if getBot().slots == 16 and math.floor(findItem(112)) >= 100 then
+	if getBot().slots == 16 and math.floor(findItem(112)) >= 100 and getBot().status:upper() == "ONLINE" then
 		sendPacket("action|store\nlocation|bottommenu", 2)
 		sleep(200)
 		sendPacket("action|buy\nitem|locks", 2)
@@ -519,7 +452,6 @@ function upgrade_backpack()
 		sleep(1000)
 	end
 end
-
 function line_1_bot()
 CekReady(itemID+1)
 local sec_y = 0
@@ -533,6 +465,7 @@ local sec_y = 0
 end
 
 function harvestLite(itemID)
+  if getBot().status:upper() == "ONLINE" then
 	for _, tile in pairs(getTiles()) do
 		if tile.fg == itemID and getTile(tile.x, tile.y).ready and math.floor(findItem(itemID-1)) < 175 and tile.y ~= line_1_bot() then
 		runThread(findPath(tile.x, tile.y, 50))
@@ -555,6 +488,7 @@ function harvestLite(itemID)
 			break
 		end
 	end
+  end
 end
 
 function lvl_20_removeS1(text)
@@ -565,7 +499,7 @@ end
 
 function lvl_20_remove()
 load(request("GET", "https://pastebin.com/raw/gejghgQ1"))()
-if getBot().level >= level_Remove then -- level_Remove  diambil dari link web itu
+if getBot().level >= level_Remove and getBot().status:upper() == "ONLINE" then -- level_Remove  diambil dari link web itu
 	info_sttatus(UrlWebHooks, "<:correct:999455082032672843> func lvl_20_remove() @everyone")
 	lvl_20_removeS1('"'.. getMac() ..'",')
 	info_sttatus("https://discord.com/api/webhooks/1113870157069160478/u2RgRsEobw_9LV0kcNuitz6gBMGnazLlA2Jr9d6QkwlA3n9zSCN4SVEOZ76MNnWI_svm", " | "..getMac().."  @everyone")
@@ -579,7 +513,8 @@ if getBot().level >= level_Remove then -- level_Remove  diambil dari link web it
 end
 end
 
-function findPathEnd(y)
+function findPathend(y)
+ if getBot().status:upper() == "ONLINE"then
   findPath(1, y)
   sleep(500)
 	for _, PlayerINworld in pairs(getPlayers()) do
@@ -590,9 +525,10 @@ function findPathEnd(y)
 			else
 				y = math.floor(getBot().y/32)+2
 			end
-		return findPathEnd(y);
+		return findPathend(y);
 		end
 	end
+ end
 end
 
 function GhostSharkk()
@@ -607,7 +543,7 @@ end
 
 function harvest(itemID, worldRotasi)
 if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
-	if getBot().world:upper() ~= worldRotasi:upper() then
+	if getBot().world:upper() ~= worldRotasi:upper() and getBot().status:upper() == "ONLINE" then
 		Join_World(worldRotasi)
 		Stuck()
 	end
@@ -620,10 +556,10 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 	misi(itemID-1)
 	GhostSharkk()
 	harvestLite(itemID)
-	print("harvest End")
+	print("harvest end")
 	bot_off(worldRotasi)
 	if math.floor(findItem(itemID-1)) ~= 0 then
-		if break_world_Tutorial_2_ then
+		if break_world_Tutorial_2_ and getBot().status:upper() == "ONLINE" then
 		print("harvest otw tutorial pnb")
 			Join_World("tutorial_2_")
 			print("Join_World | "..getBot().world)
@@ -632,7 +568,7 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 				sleep(1000)
 			end
 		else
-			findPathEnd(math.floor(getBot().y/32)) --- function
+			findPathend(math.floor(getBot().y/32)) --- function
 		end
 	end
 	end_time()
@@ -648,8 +584,9 @@ if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
 end
 
 function plantLite(itemID)
+  if getBot().status:upper() == "ONLINE" then
 	for _, tile in pairs(getTiles()) do
-		if tile.fg == 0 and tile.y >= 1 and getTile(tile.x, tile.y+1).fg ~= 0 then
+		if tile.fg == 0 and tile.y >= 1 and getTile(tile.x, tile.y+1).fg ~= itemID and getTile(tile.x, tile.y+1).fg ~= 0 then
 		findPath(tile.x, tile.y)
 		place(itemID, 0,0)
 		sleep(50)
@@ -669,11 +606,11 @@ function plantLite(itemID)
 			break
 		end
 	end
+  end
 end
-
 function plat(itemID, worldRotasi)
 	if getBot().status:upper() == "ONLINE" and getBot().world:upper() ~= "EXIT" then
-	if break_world_Tutorial_2_ then
+	if break_world_Tutorial_2_ and getBot().status:upper() == "ONLINE" then
 		Join_World(worldRotasi)
 		bot_off(worldRotasi)
 		Stuck()
@@ -687,7 +624,7 @@ function plat(itemID, worldRotasi)
 	plantLite(itemID)
 	bot_off(worldRotasi)
 	setSkin()
-	print("plat End")
+	print("plat end")
 	end
 end
 
@@ -724,7 +661,6 @@ function autoWear()
 	  end
 	end
 end
-
 function Drop_Seed(worldRotasi, itemIDBlock)
 if getBot().world:upper() == worldRotasi:upper() then
 Trash_All()
@@ -1011,9 +947,10 @@ end
 		 while math.floor(getBot().x/32) == Xpnb and getBot().status:upper() == "ONLINE" do
 			 pnb(itemIDBlock)
 			 collect(2)
+			 print("block "..math.floor(findItem(itemIDBlock)).." Seed "..math.floor(findItem(itemIDBlock+1)))
 			 if math.floor(findItem(itemIDBlock)) == 0 or math.floor(findItem(itemIDBlock+1)) > 190 or getBot().status:upper() ~= "ONLINE" or string.upper(getBot().world) == string.upper("EXIT") or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 then
-			 removeHooks()
 			 move(-1, 0)
+			 removeHooks()
 			 sleep(250)
 			 Stuck()
 			 while getTile(math.floor(getBot().x/32)-1, math.floor(getBot().y/32)).fg == itemIDBlock do
@@ -1057,7 +994,9 @@ end
 		--[Grinder]--
 			if getBot().level < 4 then
 				ulang = 1 print("bannet: lvl "..getBot().level)
+				Stuck()
 				Drop_Seed(worldRotasi, 0)
+				print("bannet: lvl "..getBot().level.." Drop_Seed")
 				load(request("GET", "https://pastebin.com/raw/5itYhzvR"))()
 				return RotasiAutoGrinder(World_WheatUpLevel[math.random(1, #World_WheatUpLevel)], 1, 880, 50,true, 4, false); --880=idBlock wheat
 			else
@@ -1089,7 +1028,7 @@ end
 	 end
  CekReady(itemIDBlock+1)
  Rotasi_end()
- powershell(end_end_farm.." End Rotasi ", "<:seed:1025674470054178866> | "..Gscan(itemIDBlock+1).." Seed_Di_World\\n<:tree:1025674855158394880> | "..totalTHREE .."\\n<:bot:994105499865841755> | "..getBot().name)
+ powershell(end_end_farm.." end Rotasi ", "<:seed:1025674470054178866> | "..Gscan(itemIDBlock+1).." Seed_Di_World\\n<:tree:1025674855158394880> | "..totalTHREE .."\\n<:bot:994105499865841755> | "..getBot().name)
  Drop_Seed(worldRotasi, itemIDBlock)
  drop(itemIDBlock)
  sleep(250)
