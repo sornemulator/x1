@@ -95,9 +95,20 @@ end
     enter()
     sleep(3000)
 	print("enter")
+		TUTORIAL1=0
 		while getBot().world:find("TUTORIAL_1") do
+		TUTORIAL1=TUTORIAL1+1
 		print("TUTORIAL_1_")
 		sleep(1000)
+			if TUTORIAL1 > 2 then
+			disconnect()
+			sleep(5000)
+			while getBot().status:upper() ~= "ONLINE" do
+			connect()
+			sleep(6000)
+			end
+	 		 return Tutor();
+			end
 		end
     findPath(46,23)
     sleep(2000)
