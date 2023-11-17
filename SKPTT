@@ -83,15 +83,20 @@ end
 	print("ftue_start_popup_close")
 	findPath(86,30)
     sleep(2000)
-	while math.floor(getBot().x/32) ~= 86 and math.floor(getBot().y/32) ~= 30 do
+	while true do
 	print("x:86 , y:30 | X:"..math.floor(getBot().x/32).." , Y:"..math.floor(getBot().y/32))
 		findPath(86,30)
 		sleep(2000)
+		if math.floor(getBot().x/32) == 86 and math.floor(getBot().y/32) == 30 then
+			print("x:86 , y:30 | X:"..math.floor(getBot().x/32).." , Y:"..math.floor(getBot().y/32))
+			break
+		end
 	end
     enter()
     sleep(3000)
 	print("enter")
 		while getBot().world:find("TUTORIAL_1") do
+		print("TUTORIAL_1_")
 		sleep(1000)
 		end
     findPath(46,23)
