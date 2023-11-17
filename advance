@@ -156,13 +156,12 @@ function hooq(var)
 	end
 end
 function Stuck()
-if getBot().status:upper() == "ONLINE" then
-	while getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 do
+	while getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 or getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6548 do
 		sendPacket("action|join_request\nname|"..getBot().world.."|"..doorID.."\ninvitedWorld|0", 3)
 		sleep(2500)
 	end
 end
-end
+
 
 function Join_World(worldRotasi)
 if getBot().status:upper() == "ONLINE" then
