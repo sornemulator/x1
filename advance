@@ -311,10 +311,6 @@ print("relapce")
 			fixTemporaryErcon()
 			relapce_reconect()
 			print("done: "..getBot().status)
-			if getBot().status:upper() == "ONLINE" then
-			   Join_World(worldRotasi)
-			   Stuck()
-			end
 		end
 		if listt > #macList then
 		relapce_Bot=false
@@ -760,7 +756,6 @@ end
 function Vending_X()
 load(request("GET", "https://pastebin.com/raw/gejghgQ1"))()
 print("Vending_X() "..WorldSaveVendSoil)
-Warp("STORE2")
 if (DropOtherWorld_inVend or math.floor(findItem(6336)) == 1 ) and getBot().status:upper() == "ONLINE" then
 	Join_World(WorldSaveVendSoil)
 	Stuck()
