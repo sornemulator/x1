@@ -100,14 +100,19 @@ end
 		TUTORIAL1=TUTORIAL1+1
 		print("TUTORIAL_1_")
 		sleep(1000)
-			if TUTORIAL1 > 2 then
-			disconnect()
-			sleep(5000)
-			while getBot().status:upper() ~= "ONLINE" do
-			connect()
-			sleep(6000)
-			end
-	 		 return Tutor();
+			if TUTORIAL1 >= 2 then
+				disconnect()
+				while getBot().status:upper() ~= "OFFLINE" do
+					print("TUTORIAL1 disconnect() == "..getBot().status:upper())
+					sleep(1000)
+				end
+				while getBot().status:upper() ~= "ONLINE" do
+					print("TUTORIAL1 connect() == "..getBot().status:upper())
+					connect() 
+					sleep(7000)
+				end
+			 print("return Tutor()")
+	 		 return Tutor()
 			end
 		end
     findPath(46,23)
