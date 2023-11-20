@@ -81,29 +81,17 @@ sleep(3500)
 sendPacket("ftue_start_popup_close", 2)
 sleep(3500)
 print("ftue_start_popup_close")
-	if putFristWL then
+	while math.floor(findItem(9640)) ~= 0 and getBot().world:upper():find(getBot().name:upper()) do
 		put(9640,0,-1)
-		say("/cheer")
-		sleep(2000)
+		sleep(2500)
 	end
-ht_20_tress()
-		if math.floor(getBot().x/32) > 80 then
-			findPath(80, 10)
-			sleep(250)
-		else
-			findPath(math.floor(getBot().x/32), 10)
-			sleep(250)
-		end
-	while math.floor(findItem(2)) ~= 0 do
-		put(2,0,-1)
-		put(2,0, 1)
-		findPath(math.floor(getBot().x/32)+1, math.floor(getBot().y/32))
-		sleep(200)
-		if math.floor(getBot().x/32) >= 97 then
-			break
-		end
-	end
- end
+if math.floor(findItem(9640)) == 1 then
+disconnect()
+sleep(5000)
+print("frist wl : "..math.floor(findItem(9640)))
+return Tutor();
+end
+end
  
 function Random_Name(jumlah)
 local chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890" -- The Char Library
@@ -327,7 +315,7 @@ function Skip_tutorial_main()
 		if SkipTutorial_targetLVL then
 			put(9640,0,-1)
 			say("/cheer")
-			sleep(1000)
+			sleep(2000)
 				whiteDoor()
 				info_sttatus(UrlWebHooks, "TargetingLevel: "..TargetingLevel.." @everyone")
 				clear_dirt()
@@ -340,9 +328,6 @@ function Skip_tutorial_main()
 			SkipTutorial_trashWear()
 			setSkin()
 			sleep(500)
-			print("Tutor BLOCNISA")
-			sendPacket("action|join_request\nname|BLOCNISA\ninvitedWorld|0", 3)
-			sleep(4000)
 		end
 	elseif Skip_tutorial_mainBoolean == false or getBot().level == 1 then -- untuk sementara
 	sendPacket("action|join_request\nname|"..Random_Name(20).."\ninvitedWorld|0", 3)
