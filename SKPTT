@@ -76,89 +76,22 @@ while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
 print("while")
 sleep(1000)
 end
-    sendPacket("ftue_start_popup_close", 2)
-	sleep(3500)
-    sendPacket("ftue_start_popup_close", 2)
-	sleep(3500)
-	print("ftue_start_popup_close")
-	findPath(86,30)
-    sleep(2000)
-	while true do
-	print("x:86 , y:30 | X:"..math.floor(getBot().x/32).." , Y:"..math.floor(getBot().y/32))
-		findPath(86,30)
-		sleep(2000)
-		if math.floor(getBot().x/32) == 86 and math.floor(getBot().y/32) == 30 then
-			print("x:86 , y:30 | X:"..math.floor(getBot().x/32).." , Y:"..math.floor(getBot().y/32))
-			break
-		end
-	end
-    enter()
-    sleep(3000)
-	print("enter")
-		TUTORIAL1=0
-		while getBot().world:find("TUTORIAL_1") do
-		TUTORIAL1=TUTORIAL1+1
-		print("TUTORIAL_1_")
-		sleep(1000)
-			if TUTORIAL1 >= 2 then
-				disconnect()
-				while getBot().status:upper() ~= "OFFLINE" do
-					print("TUTORIAL1 disconnect() == "..getBot().status:upper())
-					sleep(1000)
-				end
-				while getBot().status:upper() ~= "ONLINE" do
-					print("TUTORIAL1 connect() == "..getBot().status:upper())
-					connect() 
-					sleep(7000)
-				end
-			 print("return Tutor()")
-	 		 return Tutor()
-			end
-		end
-    findPath(46,23)
-    sleep(2000)
-	while math.floor(getBot().x/32) ~= 46 do
-	findPath(46,23)
-    sleep(2000)
-	end
-    BD(1,0)
-    place(2,1,0)
-    sleep(600)
-    BD(1,0)
-	collect(5)
-    sleep(2000)
-    place(3,1,0)
-    sleep(2000)
-    place(10672,1,0)
-    sleep(1000)
-	BD(1,0)
-    findPath(math.floor(getBot().x/32)+1, math.floor(getBot().y/32))
-	sleep(2000)
-	collect(5)
-	sleep(2000)
-	if math.floor(findItem(48)) == 1 then
-	info_sttatus(UrlWebHooks,"Skip_tutorial_main() jeans : ".. math.floor(findItem(48)).." @everyone")
-    wear(48)
-    sleep(1000)
-    sendPacket("action|quit_to_exit", 3)
-    sleep(3500)
-	validate_world= "ubi"..Random_Name(20)
-	sendPacket("action|join_request\nname|"..validate_world.."\ninvitedWorld|0", 3)
-	sleep(5000)
-		while math.floor(getBot().x/32) == 0 and math.floor(getBot().y/32) == 0 do
-		sleep(1000)
-		end
+sendPacket("ftue_start_popup_close", 2)
+sleep(3500)
+sendPacket("ftue_start_popup_close", 2)
+sleep(3500)
+print("ftue_start_popup_close")
 	if putFristWL then
 		put(9640,0,-1)
 		say("/cheer")
-		sleep(1000)
+		sleep(2000)
 	end
---	ht_20_tress()
+ht_20_tress()
 		if math.floor(getBot().x/32) > 80 then
-			findPath(80, 15)
+			findPath(80, 10)
 			sleep(250)
 		else
-			findPath(math.floor(getBot().x/32), 15)
+			findPath(math.floor(getBot().x/32), 10)
 			sleep(250)
 		end
 	while math.floor(findItem(2)) ~= 0 do
@@ -166,19 +99,9 @@ end
 		put(2,0, 1)
 		findPath(math.floor(getBot().x/32)+1, math.floor(getBot().y/32))
 		sleep(200)
-		if math.floor(getBot().x/32) > 98 then
+		if math.floor(getBot().x/32) >= 97 then
 			break
 		end
-	end
-	else
-	info_sttatus(UrlWebHooks,"Skip_tutorial_main() jeans : ".. math.floor(findItem(48)).." @everyone")
-	disconnect()
-	sleep(5000)
-		while getBot().status:upper() ~= "ONLINE" do
-		connect()
-		sleep(6000)
-		end
-	  return Tutor();
 	end
  end
  
@@ -375,7 +298,7 @@ function clear_dirt()
 end
 
 function Skip_tutorial_main()
-	if getBot().world:find("TUTORIAL_1") and getBot().status:upper() == "ONLINE" and math.floor(findItem(6336)) == 0 and Skip_tutorial_mainBoolean then
+	if getBot().status:upper() == "ONLINE" and math.floor(findItem(9640)) == 1 then
 	info_sttatus(UrlWebHooks, "Skip_tutorial_main() @everyone")
 	setBool("Ignore Gems", false)
 	sleep(500)
@@ -417,15 +340,10 @@ function Skip_tutorial_main()
 			SkipTutorial_trashWear()
 			setSkin()
 			sleep(500)
-			print("Tutor go STORE2")
-			sendPacket("action|join_request\nname|STORE2\ninvitedWorld|0", 3)
+			print("Tutor BLOCNISA")
+			sendPacket("action|join_request\nname|BLOCNISA\ninvitedWorld|0", 3)
 			sleep(4000)
 		end
-		-- setBool("Ignore Gems", true)
-		-- sleep(500)
-		-- if worldPublic_Boolean then
-		-- worldPublic()
-		-- end
 	elseif Skip_tutorial_mainBoolean == false or getBot().level == 1 then -- untuk sementara
 	sendPacket("action|join_request\nname|"..Random_Name(20).."\ninvitedWorld|0", 3)
 	sleep(4000)
@@ -438,187 +356,3 @@ function Skip_tutorial_main()
 	end
 end
 
--- ================================================================
-function lettsave(text, folder)
-	file = io.open(folder..".txt", "a")
-	file:write(text.."\n")
-	file:close()
-end
-
- function Small_L(var)
-	if var[0] == "OnConsoleMessage" and var[1]:find("has set the `$World Lock`` to `$PUBLIC") then
-		lettsave('"'..getBot().world..'",', "world_PUBLIC")
-		info_sttatus("https://discord.com/api/webhooks/1112710625643216908/w_4Xrzx2fPNpaso6OPtsWvy12qX5X8I0xdLpWr4CN6m2KTCq6bIJngZaiAyXZpMeofy5", getBot().world:upper())
-		removeHooks()
-		elseif var[0] == "OnDialogRequest" and var[1]:find("`wEdit Door``") then
-		sendPacket("action|dialog_return\ndialog_name|door_edit\ntilex|"..(math.floor(getBot().x/32)-2).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\ndoor_name|\ndoor_target|\ndoor_id|b15m1ll4h", 2)
-		elseif (var[0] == "OnDialogRequest" and var[1]:find("`wEdit My First World Lock``") ) or (var[0] == "OnDialogRequest" and var[1]:find("`wEdit World Lock``") ) then
-		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..(math.floor(getBot().x/32)-1).."|\ntiley|"..math.floor(getBot().y/32).."|\ncheckbox_public|1\ncheckbox_disable_music|0\ntempo|100\ncheckbox_disable_music_render|0\ncheckbox_set_as_home_world|1\nminimum_entry_level|1", 2)
-		elseif var[0] == "OnDialogRequest" and var[1]:find("`wEdit Small Lock``") then
-		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\nbuttonClicked|recalcLock\n\ncheckbox_public|0\ncheckbox_ignore|1", 2)
-		elseif (var[0] == "OnDialogRequest" and var[1]:find("`wEdit Door``")) or (var[0] == "OnDialogRequest" and var[1]:find("`wEdit Barn Door``")) then
-		sendPacket("action|dialog_return\ndialog_name|door_edit\ntilex|"..(math.floor(getBot().x/32)-2).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\ndoor_name|\ndoor_target|\ndoor_id|b15m1ll4h", 2)
-		elseif (var[0] == "OnDialogRequest" and var[1]:find("`wEdit My First World Lock``") ) or (var[0] == "OnDialogRequest" and var[1]:find("`wEdit World Lock``") ) then
-		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..(math.floor(getBot().x/32)-1).."|\ntiley|"..math.floor(getBot().y/32).."|\ncheckbox_public|1\ncheckbox_disable_music|0\ntempo|100\ncheckbox_disable_music_render|0\ncheckbox_set_as_home_world|1\nminimum_entry_level|1", 2)
-		elseif var[0] == "OnDialogRequest" and var[1]:find("`wEdit Small Lock``") then
-		sendPacket("action|dialog_return\ndialog_name|lock_edit\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..(math.floor(getBot().y/32)-1).."|\nbuttonClicked|recalcLock\n\ncheckbox_public|0\ncheckbox_ignore|1", 2)
-		elseif var[0] == "OnConsoleMessage" and var[1]:find("Oops, you've created too many worlds today.  Try again tomorrow!") then
-		info_sttatus("https://discord.com/api/webhooks/1112710625643216908/w_4Xrzx2fPNpaso6OPtsWvy12qX5X8I0xdLpWr4CN6m2KTCq6bIJngZaiAyXZpMeofy5", var[1])
-		main=true
-	end
-end
-
-function lettput(id, x,y)
-	while getTile(math.floor(getBot().x / 32)+x,math.floor(getBot().y / 32)+y).fg == 0 do
-	place(id,x,y)
-	sleep(300)
-	end
-end
-function lettpukul(x,y)
-	while getTile(math.floor(getBot().x / 32)+x,math.floor(getBot().y / 32)+y).fg ~= 0 do
-	punch(x,y)
-	sleep(200)
-	end
-end
-
-function lettJoin_World(dunia)
-sendPacket("action|join_request\nname|"..dunia.."|\ninvitedWorld|0", 3)
-sleep(7000)
-end
- function lettstuck()
-if getBot().status:upper() == "ONLINE" then
-	while getTile(math.floor(getBot().x/32), math.floor(getBot().y/32)).fg == 6 do
-		sendPacket("action|join_request\nname|"..getBot().world.."|"..Door_Id.."\ninvitedWorld|0", 3)
-		sleep(2500)
-	end
-end
-end
-
-function perabot()
-	Find_Fload_Item(smal_lock)
-	drop(smal_lock, math.floor(findItem(smal_lock)-target))
-	Find_Fload_Item(singnal_jammer)
-	move(-1,0) sleep(100)
-	drop(singnal_jammer, math.floor(findItem(singnal_jammer)-target))
-	Find_Fload_Item(block_door)
-	move(-1,0) sleep(100)
-	drop(block_door, math.floor(findItem(block_door)-(target*4)))
-	Find_Fload_Item(pintu_lawang)
-	move(-1,0) sleep(100)
-	drop(pintu_lawang, math.floor(findItem(pintu_lawang)-target))
-	move(-1,0) sleep(100)
-	drop(pintu_lawang+1, 0)
-	sleep(250)
-drop(pintu_lawang, math.floor(findItem(pintu_lawang)-target))
-sleep(200)
-drop(block_door, math.floor(findItem(block_door)-(target*4)))
-sleep(200)
-drop(singnal_jammer, math.floor(findItem(singnal_jammer)-target))
-sleep(200)
-drop(smal_lock, math.floor(findItem(smal_lock)-target))
-sleep(200)
-end
-
- function findBlockDrop()
-	for _, tile in pairs(getTiles()) do
-		if tile.fg == 4584 then
-		runThread(findPath(tile.x, tile.y, 5))
-		sleep(500)
-		break
-		end
-	end
- end
-
-
- function lettdrop_all()
- findBlockDrop()
-    for _,v in pairs(getInventory()) do
-		if v.id == smal_lock or v.id == singnal_jammer or v.id == block_door or v.id == pintu_lawang then -- item yang tidak dapat di drop 
-			while getBot().status:upper() == "ONLINE" do
-				drop(v.id)
-				sleep(500) -- 800
-				if math.floor(findItem(v.id)) == 0 or string.upper(getBot().world) == string.upper("EXIT") then
-				break
-				else
-				move(-1,0)
-				sleep(400)
-				end
-			end
-		end
-	end
-end
-function JedaGantian()
-	local jedaPlayers=0
-	for _, Bot in pairs(getPlayers()) do
-	jedaPlayers=jedaPlayers+1
-	end
-	return jedaPlayers;
-end
-
-function worldPublic()
-	target = 1
-	Door_Id = "b15m1ll4h"
-	smal_lock = 202
-	singnal_jammer = 226
-	block_door = 5036 -- bisa all block
-	pintu_lawang = 886 -- only barn_door/door splice dirt cave
-	world_lock = 242
-	world_gudang = "malisit"
-	lettJoin_World(world_gudang)
-	lettstuck()
---[jeda]
-	say("/sleep")
-	info_sttatus(UrlWebHooks, "15000*"..JedaGantian())
-	sleep(math.floor(15000*JedaGantian()))
-	if JedaGantian() == 0 then
-		while getBot().status:upper() ~= "ONLINE" do
-			connect()
-			sleep(10000)
-		end
-	end
-	info_sttatus(UrlWebHooks, "gass perabot()")
-	perabot()
-	wrench_delay = 3000
-	if math.floor(findItem(smal_lock))==1 and math.floor(findItem(singnal_jammer))==1 and math.floor(findItem(block_door))==4 and math.floor(findItem(pintu_lawang))==1 then
-	addHook("onvariant", "ajojing", Small_L)
-	lettJoin_World(Random_Name(math.random(7, 15)))
-	lettput(smal_lock, 0, -1)
-	lettput(singnal_jammer, 1,0) -- signal jammer
-	if getTile(math.floor(getBot().x / 32)+1,math.floor(getBot().y / 32)).fg == singnal_jammer then
-	  punch(1,0)
-	  sleep(300)
-	end
-	 lettput(block_door, -1, 0)
-	 lettput(block_door, -1,-1)
-	 lettput(block_door,  1,-1)
-	 lettput(block_door,  2,-1)
-	 lettput(pintu_lawang, -2,-1)
-	 wrench(0,-1) -- untuk small lock
-	 sleep(wrench_delay)
-	 wrench(-2,-1)
-	 sleep(wrench_delay)
-	 sendPacket("action|join_request\nname|"..getBot().world.."|"..Door_Id.."\ninvitedWorld|0", 3)
-	 sleep(3000)
-	 if math.floor(findItem(9640)) ~= 0 then
-	 place(9640, -1,0) -- world lock frist wl= 9640 wl=242
-	 sleep(2000)
-	 wrench(-1,0) -- untuk world lock
-	 sleep(wrench_delay)
-	 elseif math.floor(findItem(world_lock)) ~= 0 then
-	 place(world_lock, -1,0) -- world lock frist wl= 9640 wl=242
-	 sleep(2000)
-	 wrench(-1,0) -- untuk world lock
-	 sleep(wrench_delay)
-	 end
-	 removeHooks()
-	 if math.floor(findItem(smal_lock)) == 0 or math.floor(findItem(world_lock)) == 0 or math.floor(findItem(block_door)) < 4 or math.floor(findItem(pintu_lawang)) == 0 then
-		lettJoin_World(world_gudang)
-		lettstuck()
-		lettdrop_all()
-	 end
-	else
-		lettJoin_World(world_gudang)
-		lettstuck()
-		lettdrop_all()
-	end
-end
