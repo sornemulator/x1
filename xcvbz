@@ -1,0 +1,880 @@
+SoilFarm = 4
+connectsleep=20000
+time_jedax2=5
+--[stabil connectsleep=20000 | time_jedax1=0 | time_jedax2=5]--
+UrlW = {
+"https://discord.com/api/webhooks/1015662852520022176/N3khW1XMfM8fHzX9ZAfqTnYvH9oSyZ3Qq_aRL2ttdJ3YmPl5-ykYlm6lYKpaQCIvvScU",
+"https://discord.com/api/webhooks/1016241030493896745/uyq1qHYXDGL1utXk6ofJ_JT357mGLe0-8hx5WPUe7hsZYyvhU73sCzLBc6c2Wac5uhYL",
+"https://discord.com/api/webhooks/1016544872771108925/RMpGYZPPPMjU0_9kL9PZoVqZXo6oJIJH-FsNKRocKZQIbpv0vLuMTDpW8aSJIifSJ1Sx",
+"https://discord.com/api/webhooks/1016545520279367751/l-4RNgeG87JWJlKj9PujDK7uLTLVbUMgSPbeYyUbDjiwLLUvNJXmMbk44mhssIITeVjh",
+"https://discord.com/api/webhooks/1016545664269824060/xYpsDcrJ-Inq6AkbE4ARhetM9ggIRbUAt25C4mYBEYCk5j0CViKjlNXOKy78KJewcLsU",
+"https://discord.com/api/webhooks/1016241683207307275/hB6g-lXc5cwAHleXfZ_XZDXX0BhNvb6ke8WtZOQoI_6JZNSdhW1oZ75mBBkC8d05l_KD",
+"https://discord.com/api/webhooks/1017339625947275304/MXUFGX1vF-KopkcasTSe8fljH-n5E6eWRKkEJpfmHAxZ-XuQHBCFm8z-w8hLj3ytlJG7",
+"https://discord.com/api/webhooks/1018747630999830580/DA6Ke7vm7KsP8ljUSDfE-1k_gb3OPw-k1UItqzvQuk4vYoSbYLSJQ2o39YIPEpN1u2PQ",
+"https://discord.com/api/webhooks/1020145321365483560/4Hpu2CoT7JuEg0rmZzENyDzoIvAXkY81zIQNFc9CrHEAHVldfVpaOFW7f_VRKbvIPXJQ",
+"https://discord.com/api/webhooks/1039211983750307980/F7VHE0jfRXIByLNnAICTA2Xn72_HoyDxTVjA39oWU0sIE3R9Qv0kPmNwgFbuS1dLccRo",
+"https://discord.com/api/webhooks/1039864076546867220/3Qz--0tZFj6ZlYyCftIP0xOM6-zqIDrGzccjKfboV-q332XkrUSsBHVAEaFYAaKRO0ht",
+"https://discord.com/api/webhooks/1112550676342521916/2VALF6YVv0doUCD4JvnUD5apEktZBjBYqixk2IRv8rK8WeHbkBS9f0AQj4bJy71fM4px",
+"https://discord.com/api/webhooks/1112551054341587059/APB0JvoluvGwtcYfaRhxrMfKoQYHKTYYpGwZhRgjzUCTazhOEiCafAr3qD7bJMcJkFNt"
+
+}
+UrlWebHooks= UrlW[SoilFarm]
+itemID = 8772	-- id block
+worldHOME = {
+"U8CZNBDR","A7O6MI8","OXHUWG","PDRPBJ","LEACH7EAFZZZD",
+"NKXTRK4M3","Q4HXTBF","GNRG7VE4RCOPTV","JVIZFOQ","7MBH3IRMNW2F",
+"305SUJKMQ5","8GZGSSXZCRESH92","YN9ORWYOVTY","JK4T0ECHMK","O0SDG32GONO1ZJ",
+"02IFMNVTDKEU","LL1P5GVIM","K0FPXHJ6660J","XEWUVPP0FT","KSB13A59"
+}
+------------
+function save(text, xfolder)
+file = io.open(xfolder..".txt", "a")
+file:write(text.."\n")
+file:close()
+end
+function count_relapce_Bot()
+if relapce_Bot then
+os.remove("macList.txt")
+sleep(500)
+save("macList={", "macList")
+ for _,macc in pairs(macList) do
+	 if macc:upper() == getBot():getLogin().mac:upper() then 
+		mulaiOnline = true
+		elseif mulaiOnline then
+		save('"'..macc..'",', "macList")
+	 end
+end
+save("\n}", "macList")
+end
+mulaiOnline = false
+end
+
+function connectsleep_func()
+connectsleep_f=1
+	while true do
+	sleep(1000)
+	connectsleep_f=connectsleep_f+1
+		if getBot().status == BotStatus.online or (getBot().captcha_status == 6 and getBot().status == BotStatus.captcha_requested) or (getBot().captcha_status == 3 and getBot().status == BotStatus.captcha_requested) or getBot().status == BotStatus.account_banned or getBot().status == BotStatus.captcha_requested or getBot().status == BotStatus.location_banned or connectsleep_f >= 20 then
+		break
+		end
+	end
+end
+------------
+JenisPack = "ssp_10_pack"
+World_save_Pack = {"UEUWIHXJJZQ","NOPHAJHJWN","NFJI","WQQC","UEUWIHXJJZW"}
+count_save_gems= 2000
+HargaPack = 1000
+------------
+relapce_Bot = true -- true isi macList
+doorID = "b15m1ll4h" -- door id
+id_Trash= {5036, 7162,7164,122,234,5032,8746,5042,5024,5026,5028,5038,5034,5040,5044,2,3,14,15}
+harvestfindPath = 50
+harvesthit = 20
+plantfindPath = 30
+
+itemID_1_upLevel = 880 --id block
+TargetLevel_1_upLevel = 4
+itemID_2_upLevel = 8772--id block
+
+getBot().collect_range = 3
+--[sendWebhook]--
+	function sendWebhook(informasi,teks)
+	load(read("macList.txt"))()
+	if getBot().status == 1 then xstatus="<:online:1180708260676911104>" else xstatus="<:offline:1180708349956849684>" end
+        local script = [[
+        $webHookUrl = "]]..UrlWebHooks..[["
+        [System.Collections.ArrayList]$embedArray = @()
+        $color = ']] .. math.random(1111111,9999999) .. [['
+        $cpu = (Get-WmiObject win32_processor | Measure-Object -property LoadPercentage -Average | Select Average).Average
+        $ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
+        $description = ']]	.."<:time:1180704744113717289> | "..(os.date('%M:%S')).." World "..ulang.."<:from:1180939656687263804>"..#worldHOME.." | <:Lucifer:1144402370940383313> : "..#macList.." macList\n<:world:991268717667299328> | "..getBot():getWorld().name:upper().."  status | "..xstatus.."\n<:buku:1040970944094675024> | "..informasi.."\n\n"..teks.."\n\n"..[['
+        
+        $embedObject = [PSCustomObject]@{
+            color = $color
+            description = "$description**Cpu : $cpu% || Ram : $ram Mb**"
+            timestamp = Get-Date -Format o
+        }
+        $embedArray.Add($embedObject)
+        $payload = [PSCustomObject]@{
+		   'avatar_url' = 'https://i.postimg.cc/rmhnqMHq/IMG-20221101-131046.jpg'
+            embeds = $embedArray
+        }
+        
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 5) -Method Post -ContentType 'application/json' ]]
+        
+        local pipe = io.popen("powershell -command -", "w")
+          pipe:write(script)
+          pipe:close()
+    end
+	
+function sendWebhook1(Url_Offline, texttext)
+texttext = string.gsub(texttext, "\n\n", "\n")
+webhook = Webhook.new(Url_Offline)
+webhook.embed1.use = true
+webhook.embed1.title = getBot().name.." | "..texttext
+webhook:send()
+end
+function webhookEmot(id) -- id block
+	if id == 880 or id == 881 then
+		block_hook = "<:block_wheat:1180698653757800508>"
+		seed_hook = "<:seed_wheat:1180698731868344420>"
+		trees_hook = "<:trees_wheat:1180698826336636929>"
+	elseif id == 8772 or id == 8773 then
+		block_hook = "<:block_soil:1180698009374294107>" 
+		seed_hook = "<:seed_soil:1180698114504544307>"
+		trees_hook = "<:trees_soil:1180698202169680023>"
+	elseif id == 954 or id == 955 then
+		block_hook = "<:block_sugar:1180697498558398464>"
+		seed_hook = "<:seed_sugar:1180697599381078146>"
+		trees_hook = "<:trees_sugar:1180697686907834408>"
+	end
+end
+------------------
+ulang= SoilFarm
+------------------
+function start_break_block()
+kayitliyil =(os.date"%Y")
+kayitligun =(os.date"%d")
+kayitliay =(os.date"%m")
+kayitlisaat =(os.date"%H")
+kayitlidakika=(os.date"%M")
+kayitlisaniye=(os.date"%S")
+ilkzaman = os.time {year = kayitliyil , month = kayitliay , day = kayitligun , hour = kayitlisaat ,min =kayitlidakika , sec = kayitlisaniye}
+end
+function end_break_block()
+kayitliyil1 =(os.date"%Y")
+kayitligun1 =(os.date"%d")
+kayitliay1 =(os.date"%m")
+kayitlisaat1 =(os.date"%H")
+kayitlidakika1=(os.date"%M")
+kayitlisaniye1=(os.date"%S")
+sonzaman = os.time {year = kayitliyil1 , month = kayitliay1 , day = kayitligun1 , hour = kayitlisaat1 ,min =kayitlidakika1 , sec = kayitlisaniye1}
+kalanzamansaniye = sonzaman-ilkzaman
+adimadimtarih = (kalanzamansaniye/60)/60
+sonsaaat= math.floor(adimadimtarih)
+sondakika = math.floor((adimadimtarih-sonsaaat)*60)
+break_time = sondakika.." Menit "..(os.date"%S").." detik "
+end
+
+function start_time()
+start_year=(os.date"%Y")
+start_days=(os.date"%d")
+start_month=(os.date"%m")
+start_hours=(os.date"%H")
+start_min=(os.date"%M")
+start_sec=(os.date"%S")
+start_timeStap = os.time {year = start_year , month = start_month , day = start_days , hour = start_hours ,min =start_min , sec = start_sec}
+end
+start_time()
+function end_time()
+end_year=(os.date"%Y")
+end_days=(os.date"%d")
+end_month=(os.date"%m")
+end_hour=(os.date"%H")
+end_min=(os.date"%M")
+end_sec=(os.date"%S")
+end_timeStap = os.time {year = end_year , month = end_month , day = end_days , hour = end_hour ,min =end_min , sec = end_sec}
+end_timeStap1 = end_timeStap-start_timeStap
+end_timeStap2 = (end_timeStap1/60)/60
+Jam = math.floor(end_timeStap2)
+Days = math.floor((Jam/24))
+menit = math.floor((end_timeStap2-Jam)*60)
+while Jam >= 24 do
+Jam=Jam-24
+end
+up_time = Days.." day "..Jam.." hour "..menit.." min "
+end
+
+--[recon-relapce]--
+function offline_bot()
+status_bot=1
+for _, bot in pairs(getBots()) do
+if bot.status ~= BotStatus.online then
+	status_bot = status_bot+1
+end
+end
+return status_bot;
+end
+function Rid_Gennerate(jumlah)
+	local chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM" -- The Char Library
+	nameBot = ""
+	for i = 1,jumlah do
+	local rint = math.random(1, #chars) -- 1 out of length of chars
+	nameBot = nameBot..chars:sub(rint, rint)
+	end
+	return "01D27A"..nameBot:upper();
+end
+function LuciferReconnect(worldRotasi)
+if getBot().status ~= BotStatus.online or getBot():getPing() == 0 then
+ercon2menit = 0
+LuciferReconnectError=0
+cList = 0 -- untuk macList looping
+getBot().auto_collect = false
+load(read("macList.txt"))()
+sleep(2000)
+if offline_bot_boolean then time_jeda((offline_bot()+time_jedax2), "offline_bot") end
+sendWebhook1(UrlWebHooks, "LuciferReconnect <:offline:1180708349956849684> @everyone")
+if getBot().status == BotStatus.online and getBot():getPing() == 0 then getBot():disconnect() sleep(connectsleep) end
+	while true do
+		if getBot().status == 18 then bot_status = "captcha_requested" elseif getBot().status == 3 then bot_status = "account_banned" elseif getBot().status == 4 then bot_status = "location_banned" end
+		
+	cek_status_bot_sebelumnya()
+		if LuciferReconnectError >= 10 then
+		sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528> LuciferReconnectError: "..LuciferReconnectError)
+		LuciferReconnectError=0
+		getBot():updateBot(getBot().name, getBot():getLogin().mac, Rid_Gennerate(math.random(24, 26)))
+		time_jeda(time_jedax2, "LuciferReconnectError")
+		elseif getBot().status == BotStatus.online then
+		offline_bot_boolean=true
+		save('"'..getBot():getLogin().mac..'",', "accMac")
+			start_time()
+			sendWebhook1(UrlWebHooks, "LuciferReconnect <:online:1180708260676911104> @everyone")
+			break
+		elseif (getBot().captcha_status == 6 and getBot().status == BotStatus.captcha_requested) or (getBot().captcha_status == 3 and getBot().status == BotStatus.captcha_requested) or getBot().status == BotStatus.account_banned or getBot().status == BotStatus.captcha_requested then
+--[relapceBot]--
+		cList = cList+1
+		LuciferReconnectError=0
+		ercon2menit=ercon2menit+1
+		if cList > #macList then
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528><:mac:1180737872156950528><:mac:1180737872156950528> removeBot")
+			removeBot(getBot().name)
+			sleep(1000)
+			getBot():stopScript()
+			else
+			getBot():setMac(macList[cList]:lower())
+			count_relapce_Bot()
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528>  "..bot_status.." <:arrow:1180703050353098832>"..cList.."<:from:1180939656687263804>"..#macList.." "..macList[cList])
+			setMac_macList = true
+			end
+		elseif getBot().status == BotStatus.location_banned then
+		sendWebhook1(UrlWebHooks, "location_banned")
+			cList = cList+1
+			if cList > #macList then
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528><:mac:1180737872156950528><:mac:1180737872156950528> removeBot")
+			removeBot(getBot().name)
+			sleep(1000)
+			getBot():stopScript()
+			else
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528>  "..bot_status.." <:arrow:1180703050353098832>"..cList.."  "..macList[cList])
+			addBot(getBot().name, macList[cList]:lower(), "01D27AF913AC22AF03FD"..string.gsub(macList[cList], ":", ""):upper())
+			end
+		elseif getBot().status == BotStatus.version_update then
+		sendWebhook1(UrlWebHooks, "version_update")
+		end
+
+		if setMac_macList then getBot():updateBot(getBot().name, getBot():getLogin().mac:upper(), Rid_Gennerate(math.random(24, 26))) setMac_macList=false end
+		getBot():connect()
+		sleep(connectsleep)
+		LuciferReconnectError=LuciferReconnectError+1
+		sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528> LuciferReconnectError: "..LuciferReconnectError)
+		if ercon2menit >= 10 then ercon2menit=0 time_jeda(2, "ercon2menit") end
+	end
+end
+skipTutor()
+mainAutoTakePickaxe()
+Join_World(worldRotasi)
+stuck()
+end
+
+function all_botList()
+botList =0
+	for i, bot in ipairs(getBots()) do
+	botList=botList+1
+	end
+	return botList;
+end
+
+function LuciferReconnectStep(worldRotasi)
+	if getBot().status ~= BotStatus.online or getBot():getPing() == 0 then
+	getBot().auto_reconnect=false
+	sleep(2000)
+	if getBot():getPing() == 0 then getBot():disconnect() sleep(2000) end
+		for i=1, all_botList() do
+			if getBot().name == getBot(i).name then
+			print(getBot().name.." adalah slot ke "..i)
+			if getBot().name ~= getBot(1).name then time_jeda(time_jedax2, "LuciferReconnectStep") end
+			LuciferReconnect(worldRotasi)
+			break
+			else
+				while getBot(i).status ~= BotStatus.online or getBot(i):getPing() == 0 do
+					print(getBot().name.." nunggu "..getBot(i).name.." BotStatus.online")
+					sleep(10000)
+					if getBot().name == getBot(i).name then
+					return LuciferReconnectStep(worldRotasi)
+					elseif getBot(i).status == BotStatus.online then
+					-- return LuciferReconnectStep(worldRotasi)
+					break
+					end
+				end
+			end
+		end
+	end
+end
+function time_jeda(x, text)
+start_break_block()
+sendWebhook1(UrlWebHooks, "<:time:1180704744113717289> | "..x.."  "..text)
+	while true do
+	sleep(5000)
+	end_break_block()
+		if sondakika >= x then
+		break
+		end
+	end
+end
+
+function cek_status_bot_sebelumnya()
+for i, bot in ipairs(getBots()) do
+if getBot().name == bot.name then
+	status_bot = i
+	break
+end
+end
+	if     status_bot == 2 then
+		if getBot(1).status ~= BotStatus.online or getBot(1):getPing() == 0 then
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528> | cek_status_bot_sebelumnya")
+			LuciferReconnectStep(worldRotasi)
+		end
+	elseif status_bot == 3 then
+		if getBot(1).status ~= BotStatus.online or getBot(1):getPing() == 0 or getBot(2).status ~= BotStatus.online or getBot(2):getPing() == 0 then
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528> | cek_status_bot_sebelumnya")
+			LuciferReconnectStep(worldRotasi)
+		end
+	elseif status_bot == 4 then
+		if getBot(1).status ~= BotStatus.online or getBot(1):getPing() == 0 or getBot(2).status ~= BotStatus.online or getBot(2):getPing() == 0 or getBot(3).status ~= BotStatus.online or getBot(3):getPing() == 0 then
+			sendWebhook1(UrlWebHooks, "<:mac:1180737872156950528> | cek_status_bot_sebelumnya")
+			LuciferReconnectStep(worldRotasi)
+		end
+	end
+end
+
+----------------
+function getLink(link)
+local client = HttpClient.new()
+client.method = Method.get
+client.url = link
+response = client:request()
+load(response.body)()
+end
+
+function stuck()
+	while (getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6 or getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6548) and getBot().status == BotStatus.online do
+	getBot():sendPacket(3, "action|join_request\nname|"..getBot():getWorld().name.."|"..doorID.."\ninvitedWorld|0")
+	sleep(2000)
+		if getBot():getWorld().name:lower():find("tutorial_2_") then
+		break
+		end
+	end
+end
+function Join_World(worldRotasi)
+getBot().auto_collect = false
+entringWorld=0
+  while getBot():getWorld().name:upper() ~= worldRotasi:upper() and getBot().status == BotStatus.online do
+	-- getBot():sendPacket(3, "action|join_request\nname|"..worldRotasi.."\ninvitedWorld|0")
+	getBot():warp(worldRotasi, doorID)
+	sleep(math.floor(math.random(5000, 7000)))
+		if entringWorld > 2 then
+		entringWorld=0
+		sendWebhook1(UrlWebHooks, "entringWorld "..getBot():getWorld().name:upper().." == "..worldRotasi:upper())
+		LuciferReconnectStep(worldRotasi)
+		end
+		entringWorld=entringWorld+1
+  end
+end
+
+function ready_trees(id)
+local count = 0
+  for _, tile in pairs(getBot():getWorld():getTiles()) do
+    if tile.fg == id and getTile(tile.x,tile.y):canHarvest() then
+	count=count+1
+	end
+  end
+return count;
+end
+function all_trees(id)
+local count = 0
+  for _, tile in pairs(getBot():getWorld():getTiles()) do
+    if tile.fg == id then
+	count=count+1
+	end
+  end
+return count;
+end
+
+function secenbot_y()
+pY = 0
+for _, playr in pairs(getPlayers()) do
+    if not playr.isLocalPlayer then
+      pY = math.floor(playr.posy/32)
+	  break
+    end
+end
+return pY;
+end
+
+function harvest(id, worldRotasi, count)
+  for _, tile in pairs(getBot():getWorld():getTiles()) do
+    if tile.fg == id and getTile(tile.x,tile.y):canHarvest() and getBot():getWorld().name == worldRotasi and getBot():getInventory():findItem(id) <= 180 and tile.y ~= secenbot_y() then
+      getBot():findPath(tile.x,tile.y)
+      sleep(harvestfindPath)
+	  getBot():hit(tile.x,tile.y)
+	  getBot():collect(3,3)
+	  sleep(harvesthit)
+		  if getBot():getInventory():findItem(id-1) >= count then
+			break
+		  elseif getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6 then
+		  stuck()
+		  elseif getBot().status ~= BotStatus.online or getBot():getPing() == 0 then
+		  print("harvest offline")
+		  LuciferReconnectStep(worldRotasi)
+		  stuck()
+		  return harvest(id, worldRotasi, count)
+		  end
+    end
+  end
+end
+
+function harvestMain(id, worldRotasi)
+if getBot().status == BotStatus.online then
+	if getBot():getWorld().name:upper() ~= worldRotasi:upper() or getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6 or getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6548 then
+		Join_World(worldRotasi)
+		stuck()
+		puchClear(0,1)
+	end
+	webhookEmot(id)
+	end_time()
+	sendWebhook("<:harvest:1025687020628095026> harvestMain", "<:jam:987145988470898758> | "..up_time.."\n<:bot:994105499865841755> | "..getBot().name.."\n"..trees_hook.." | "..ready_trees(id).." ready_trees\n"..seed_hook.." | "..all_trees(id).." all_trees\n<:gemss:1180703644153294928> | "..getBot().gem_count.." gems\n<:bot:1025674678301364304> | "..getBot().level.." level\n<:ping:1180782776614649916> | "..getBot():getPing())
+	harvest(id, worldRotasi, 170)
+end
+end
+
+ function pukul(x,y)
+	if getTile(math.floor(getBot():getWorld():getLocal().posx // 32)+x, math.floor(getBot():getWorld():getLocal().posy // 32)+y).fg ~= 0 then
+	getBot():hit(math.floor(getBot():getWorld():getLocal().posx // 32)+x, math.floor(getBot():getWorld():getLocal().posy // 32)+y)
+	sleep(170)
+	end
+ end
+ 
+ function puchClear(x,y)
+	for hjr=1, 4 do
+	pukul(x,y)
+	end
+ end
+ 
+function pnb(x,y,id)
+breakHit = getInfo(id).strength
+	getBot():place(math.floor(getBot():getWorld():getLocal().posx // 32)+x, math.floor(getBot():getWorld():getLocal().posy // 32)+y, id)
+	sleep(110)
+	for hjr=1, breakHit do
+	pukul(x,y)
+	end
+end
+
+function PnbWithTutorial(id, TargetLevel, worldRotasi)
+getBot():warp("tutorial_2_")
+sleep(5000)
+while math.floor(getBot():getWorld():getLocal().posx // 32) ~= 50 and getBot():getWorld().name:upper():find("TUTORIAL_2_") do
+	getBot():findPath(50, math.floor(getBot():getWorld():getLocal().posy // 32))
+	sleep(250)
+end
+start_break_block()
+sendWebhook("<:Break:1025674579856871445> PnbWithTutorial", "<:bot:994105499865841755> | "..getBot().name)
+getBot().auto_collect = true
+while getBot():getPing() ~= 0 and getBot():getInventory():findItem(id) ~= 0 and getBot():getInventory():findItem(id+1) <= 180 and getBot():getWorld().name ~= "EXIT" and getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg ~= 6 and getBot().status == BotStatus.online do
+	pnb(-1, 0, id)
+	pnb(-1, -1, id)
+	if (id == itemID_1_upLevel and getBot().level >= TargetLevel) or (id == itemID_2_upLevel and getBot().level < TargetLevel) then
+		sendWebhook1(UrlWebHooks, "<:bot:1025674678301364304> | "..getBot().level.." | PnbWithTutorial")
+		while_pnb=false
+		break
+	elseif getBot().status ~= 1 then -- getBot().status 1=online
+	sendWebhook1(UrlWebHooks, "PnbWithTutorial LuciferReconnect")
+	LuciferReconnect(worldRotasi)
+	end
+end
+end_break_block()
+webhookEmot(id)
+sendWebhook(break_time, "<:bot:994105499865841755> | "..getBot().name)
+	Trash_All()
+end
+
+function plant(id, worldRotasi)
+getBot().auto_collect = true
+  for _, tile in pairs(getBot():getWorld():getTiles()) do
+	local korX=tile.x
+	local korY=tile.y
+    if tile.fg == 0 and korY > 0 and getTile(korX, korY+1).fg ~= 0 and getTile(korX, korY+1).fg ~= id and getBot():getWorld().name == worldRotasi:upper() then
+	getBot():findPath(tile.x,tile.y)
+	getBot():place(tile.x, tile.y, id)
+	sleep(plantfindPath)
+		if getBot():getInventory():findItem(id) == 0 then
+			break
+		elseif getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6 then
+		stuck()
+		elseif getBot().status ~= BotStatus.online and getBot():getPing() == 0 then
+		print("plant offline")
+		LuciferReconnectStep(worldRotasi)
+		stuck()
+		return plant(id, worldRotasi)
+		end
+    end
+  end
+end
+
+function plantMain(id, worldRotasi)
+if getBot().status == BotStatus.online then
+	if getBot():getWorld().name:upper() ~= worldRotasi:upper() or getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6 or getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 6548 then
+		Join_World(worldRotasi)
+		stuck()
+		puchClear(0,1)
+	end
+	webhookEmot(id)
+	end_time()
+	sendWebhook("<:place:1025675245736165426> plantMain", "<:jam:987145988470898758> | "..up_time.."\n<:bot:994105499865841755> | "..getBot().name.."\n"..trees_hook.." | "..ready_trees(id).." ready_trees\n"..seed_hook.." | "..all_trees(id).." all_trees\n<:gemss:1180703644153294928> | "..getBot().gem_count.." gems\n<:bot:1025674678301364304> | "..getBot().level.." level\n<:ping:1180782776614649916> | "..getBot():getPing())
+	plant(id, worldRotasi)
+end
+end
+
+ function Trash_All()
+    for _,item_id_Trash in pairs(id_Trash) do
+		if getBot():getInventory():findItem(item_id_Trash) ~= 0 and getBot():getWorld().name:upper() ~= "EXIT" and getBot().status == BotStatus.online then
+			getBot():sendPacket(2, "action|trash\n|itemID|".. item_id_Trash)
+			getBot():sendPacket(2, "action|dialog_return\ndialog_name|trash_item\nitemID|".. item_id_Trash .."|\ncount|" .. getBot():getInventory():findItem(item_id_Trash))
+			sleep(250)
+		end
+	end
+ end
+
+function upgrade_backpack()
+	if getBot():getInventory().slotcount == 16 and getBot().gem_count >= 100 and getBot().status == BotStatus.online then
+		getBot():sendPacket(2, "action|store\nlocation|bottommenu")
+		sleep(200)
+		getBot():sendPacket(2, "action|buy\nitem|locks")
+		sleep(200)
+		getBot():sendPacket(2, "action|buy\nitem|upgrade_backpack")
+		sleep(500)
+	end
+end
+
+function dropAll(itemID) -- id block
+while math.floor(getBot():getWorld():getLocal().posx // 32) ~= 98 and math.floor(getBot():getWorld():getLocal().posy // 32) ~= 53 do
+getBot():findPath(98, 53)
+sleep(2500)
+end
+getBot().auto_collect = false
+	for i, item in pairs(getBot():getInventory():getItems()) do
+		if item.id == 1486 or item.id == 18 or item.id == 32 or item.id == 98 or item.id == itemID or item.id == itemID+1 then
+		else
+			while getBot():getInventory():findItem(item.id) ~= 0 do
+				getBot():drop(item.id, getBot():getInventory():findItem(item.id))
+				sleep(250)
+				if getBot():getInventory():findItem(item.id) ~= 0 then
+				getBot():findPath(math.floor(getBot():getWorld():getLocal().posx // 32)-1, math.floor(getBot():getWorld():getLocal().posy // 32))
+				sleep(250)
+				end
+			end
+		end
+	end
+end
+
+function DropPack_and_BlockPNB(itemID) -- id seed
+getBot().auto_collect = false
+	for i, item in pairs(getBot():getInventory():getItems()) do
+		if item.id == 1486 or item.id == 18 or item.id == 32 or item.id == 98 or item.id == itemID or item.id == itemID+1 then
+		else
+			while getBot():getInventory():findItem(item.id) ~= 0 do
+				getBot():drop(item.id, getBot():getInventory():findItem(item.id))
+				sleep(250)
+				if getBot():getInventory():findItem(item.id) ~= 0 then
+				getBot():findPath(math.floor(getBot():getWorld():getLocal().posx // 32)-1, math.floor(getBot():getWorld():getLocal().posy // 32))
+				sleep(250)
+				end
+			end
+		end
+	end
+end
+
+--[addVending]--
+function Vending_X(worldRotasi)
+getLink("https://pastebin.com/raw/gejghgQ1")
+LuciferReconnectStep(worldRotasi)
+if DropOtherWorld_inVend and getBot().status == BotStatus.online then
+	Join_World(WorldSaveVendSoil)
+	stuck()
+	getBot():sendPacket(2, "action|setFilter\nfiltering|1\ncbits|1058")
+	sleep(250)
+	getBot():sendPacket(2, "action|setOnlyFriendsChat\nshow|1")
+	sleep(250)
+	for _, tile in pairs(getBot():getWorld():getTiles()) do
+		if tile.fg == 2978 then
+			Kor_X=tile.x
+			SaveVendSoilWorld=getBot():getWorld().name:upper()
+			break
+		end
+	end
+	end
+end
+function Add_Vending(itemID, worldRotasi)
+sendWebhook("<:vend:1180784182574731304> Add_Vending", "<:bot:994105499865841755> | "..getBot().name)
+getBot().auto_collect = false
+getLink("https://pastebin.com/raw/gejghgQ1")
+if getBot():getWorld().name:upper() == SaveVendSoilWorld:upper() then
+for _, tile in pairs(getBot():getWorld():getTiles()) do
+	if tile.fg == 2978 and tile.x == Kor_X then
+		getBot():findPath(tile.x, tile.y)
+		sleep(1500)
+		if getTile(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)).fg == 2978 then
+			getBot():wrench(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32))
+			sleep(1000)
+			getBot():sendPacket(2, "action|dialog_return\ndialog_name|vending\ntilex|"..math.floor(getBot():getWorld():getLocal().posx // 32).."|\ntiley|"..math.floor(getBot():getWorld():getLocal().posy // 32).."|\nbuttonClicked|addstock")
+			sleep(2000)
+		end
+		if getBot():getInventory():findItem(itemID) == 0 then
+			sendWebhook("<:vend:1180784182574731304> Add_Vending | succes", "<:bot:994105499865841755> | "..getBot().name)
+			getBot():say("/love") -- /cheer
+			sleep(2000)
+			break
+		elseif getBot():getInventory():findItem(itemID) >= 1 then
+			if getTile(Kor_X+1, math.floor(getBot():getWorld():getLocal().posy // 32)).fg ~= 2978 then
+				Join_World(worldRotasi)
+				stuck()
+				-- dropAll(itemID)
+				break
+			else
+				Kor_X=math.floor(getBot():getWorld():getLocal().posx // 32)+1
+			end
+		end
+	end
+end
+end
+	Join_World(worldRotasi)
+	stuck()
+	if getBot():getInventory():findItem(itemID) > 0 then 
+	-- dropAll(itemIDBlock)
+	end
+end
+
+--[grinder]--
+function findGrinder()
+for _, tile in pairs(getBot():getWorld():getTiles()) do
+	if tile.fg == 4582 then
+	AutoFlourX = tile.x
+	AutoFlourY = tile.y
+		getBot():findPath(AutoFlourX-1, AutoFlourY)
+		sleep(2000)
+		break
+	end
+end
+end
+
+function grinder_block(itemIDBlock, AutoFlourX, AutoFlourY, countGrinder) -- countGrinder flour = 50 // sugar = 100
+getBot():place(AutoFlourX, AutoFlourY, itemIDBlock)
+sleep(500)
+getBot():sendPacket(2, "action|dialog_return\ndialog_name|grinder\ntilex|".. AutoFlourX .."|\ntiley|".. AutoFlourY .."|\nitemID|"..(itemIDBlock).."|\ncount|"..math.floor(getBot():getInventory():findItem(itemIDBlock)/countGrinder))
+sleep(2000)
+end
+
+function HtToAutoGrinder(itemIDBlock, countGrinder, worldRotasi)
+if 880 == itemIDBlock then
+grinder_name = getInfo(4562).name
+elseif 954 == itemIDBlock then
+grinder_name = getInfo(4572).name
+end
+	Trash_All()
+	harvest(itemIDBlock+1, worldRotasi, 199)
+	if getBot():getInventory():findItem(itemIDBlock) >= countGrinder then
+	Join_World("5422F736EB501FC")
+	sendWebhook1(UrlWebHooks, "<:foodgrinder:1180696951205941318> | "..getBot():getWorld().name:upper().." "..grinder_name)
+	stuck()
+	findGrinder()
+	grinder_block(itemIDBlock, AutoFlourX, AutoFlourY, countGrinder)
+	DropPack_and_BlockPNB(itemIDBlock)
+	Join_World(worldRotasi)
+	stuck()
+	end
+end
+--[================]--
+function skipTutor()
+getBot().auto_tutorial  = false
+sleep(2500)
+if getBot():getWorld().name:upper():find(getBot().name:upper()) and getBot():getInventory():findItem(9640) == 1 and getBot().status == BotStatus.online then
+	getBot():sendPacket(2, "ftue_start_popup_close")
+	sleep(4000)
+	getBot():place(math.floor(getBot():getWorld():getLocal().posx // 32), math.floor(getBot():getWorld():getLocal().posy // 32)-1, 9640)
+	sleep(2000)
+	skipTutor()
+end
+getBot().auto_tutorial  = true
+sleep(2500)
+end
+function htPickAxe()
+print("htPickAxe")
+  for _, tile in pairs(getBot():getWorld():getTiles()) do
+    if tile.fg == 99 and getTile(tile.x,tile.y):canHarvest() and getBot():getInventory():findItem(98) == 0 then
+		  getBot():findPath(tile.x,tile.y)
+		  sleep(2000)
+		  getBot():hit(tile.x,tile.y)
+		  sleep(500)
+		  print("htPickAxe | hit")
+		  getBot():collect(3,3)
+		  sleep(500)
+			getBot().auto_collect = false
+			sleep(250)
+		  	while getBot():getInventory():findItem(98) > 1 do
+			print("htPickAxe | drop")
+			getBot():drop(98, getBot():getInventory():findItem(98)-1)
+			sleep(2000)
+			end
+		  break
+	end
+  end
+end
+
+function findPickaxe()
+print("findPickaxe")
+for _, obj in pairs(getBot():getWorld():getObjects()) do
+  if obj.id == 98 then
+    getBot():findPath(math.floor(obj.x//32), math.floor(obj.y//32))
+	sleep(2000)
+	print("findPickaxe | collect")
+    getBot():collect(3,3)
+    sleep(500)
+	break
+  end
+end
+end
+
+function wear_pickaxe()
+hnd = 0
+if getLocal() then
+  clothes = getLocal().clothes
+  hnd = clothes.hand
+end
+return hnd;
+end
+
+function mainAutoTakePickaxe()
+if getBot():getInventory():findItem(98) == 0 then
+	Join_World("ssampahcid")
+	stuck()
+	sendWebhook("<:pickaxe:1180699123276599398> mainAutoTakePickaxe: "..getBot():getInventory():findItem(98), "<:bot:994105499865841755> | "..getBot().name)
+	getBot().auto_collect = true
+	findPickaxe()
+	htPickAxe()
+	getBot().auto_collect = false
+	sleep(250)
+	if getBot():getInventory():findItem(98) ~= 0 then
+	getBot():wear(98)
+	sleep(2000)
+	end
+	getBot():findPath(90,10)
+	sleep(2000)
+	print("	mainAutoTakePickaxe | find")
+	while getBot():getInventory():findItem(98) > 1 do
+	print("	mainAutoTakePickaxe | drop")
+	getBot():drop(98, getBot():getInventory():findItem(98)-1)
+	sleep(1000)
+	end
+	while wear_pickaxe() ~= 98 do
+		getBot():wear(98)
+		sleep(500)
+	end
+	sendWebhook("<:pickaxe:1180699123276599398> mainAutoTakePickaxe: "..getBot():getInventory():findItem(98), "<:bot:994105499865841755> | "..getBot().name.."\n<:pickaxe:1180699123276599398> | "..getBot():getInventory():findItem(98).." | 98 == "..wear_pickaxe())
+end
+end
+
+--[buy pack]--
+function buy_pack()
+	getBot():sendPacket(2, "action|store\nlocation|bottommenu")
+	sleep(100)
+	getBot():sendPacket(2, "action|buy\nitem|bigitems")
+	sleep(200)
+	getBot():sendPacket(2, "action|buy\nitem|"..JenisPack)
+	sleep(500)
+end
+function Go_save_gems(worldRotasi, itemIDBlock)
+if getBot().status == BotStatus.online and getBot().gem_count >= count_save_gems then
+	Join_World(World_save_Pack[math.random(1, #World_save_Pack)])
+	stuck()
+	sendWebhook1(UrlWebHooks, "<:pack:1180738535247061074> | Go_save_gems")
+	Trash_All()
+		while getBot().gem_count > HargaPack and getBot().status == BotStatus.online do
+			buy_pack()
+		end
+	DropPack_and_BlockPNB(itemIDBlock)
+	Join_World(worldRotasi)
+	stuck()
+	sendWebhook1(UrlWebHooks, "<:pack:1180738535247061074> | Go_save_gems | back_rotasi")
+end
+end
+--[================]--
+
+function RotasiAutoGrinder(worldRotasi, CountWorldRotasi, itemIDBlock, Grinder1xBerapaBlock_Bagi, HtToAutoGrinder_Boolean, TargetLevel, LoopingRotasi)
+	LuciferReconnectStep(worldRotasi)
+	Vending_X(worldRotasi)
+	while_pnb = true
+	while while_pnb and getBot().status == BotStatus.online do
+		harvestMain(itemIDBlock+1, worldRotasi)
+		upgrade_backpack()
+		PnbWithTutorial(itemIDBlock, TargetLevel, worldRotasi)
+		plantMain(itemIDBlock+1, worldRotasi)
+		getLink("https://pastebin.com/raw/gejghgQ1")
+		LuciferReconnectStep(worldRotasi)
+		if (itemIDBlock == itemID_1_upLevel and getBot().level >= TargetLevel) or (itemIDBlock == itemID_2_upLevel and getBot().level < TargetLevel) then
+		sendWebhook1(UrlWebHooks, "<:bot:1025674678301364304> | "..getBot().level.." | RotasiAutoGrinder")
+		dropAll(0)
+		while_pnb=false
+		break
+		elseif getBot():getInventory():findItem(itemIDBlock+1) >= 50 then
+			if HtToAutoGrinder_Boolean then
+			--[grinder]--
+			  HtToAutoGrinder(itemIDBlock, Grinder1xBerapaBlock_Bagi, worldRotasi)
+			else
+			--[addvend]--
+				if DropOtherWorld_inVend then
+				Join_World(WorldSaveVendSoil)
+				stuck()
+					if getBot():getWorld().name:upper() == SaveVendSoilWorld:upper() then
+						Add_Vending(itemIDBlock+1, worldRotasi)
+					else
+						Vending_X(worldRotasi)
+						Add_Vending(itemIDBlock+1, worldRotasi)
+					end
+				else
+				dropAll(0)
+				end
+			end
+		end
+	Go_save_gems(worldRotasi, itemIDBlock)
+	LuciferReconnectStep(worldRotasi)
+	end
+end
+
+function main()
+if getBot().level < TargetLevel_1_upLevel then
+	print("wheat")
+	getLink("https://pastebin.com/raw/5itYhzvR")
+	RotasiAutoGrinder(World_WheatUpLevel[math.random(1, #World_WheatUpLevel)], 1, itemID_1_upLevel, 50,true, TargetLevel_1_upLevel, false)
+	print("done")
+end
+	print("SoilFarm")
+	RotasiAutoGrinder(worldHOME[SoilFarm], #worldHOME, itemID_2_upLevel, 100, false, TargetLevel_1_upLevel, false) -- itemIDBlock == 954 and getBot().level < TargetLevel
+print("getBot().status: "..getBot().status)
+LuciferReconnectStep(worldHOME[SoilFarm])
+end
+
+function AvoidError()
+        if pcall(function()
+    main()
+    end) == false then
+    sleep(100)
+    AvoidError()
+        end
+        sleep(100)
+        AvoidError()
+end
+load(read("macList.txt"))()
+sleep(2000)
+sendWebhook1(UrlWebHooks, "script <:Lucifer:1144402370940383313> Mac: "..#macList)
+LuciferReconnectStep(worldHOME[SoilFarm])
+AvoidError()
